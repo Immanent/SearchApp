@@ -68,4 +68,14 @@
     <servlet-name>RefreshToken</servlet-name>
     <url-pattern>/RefreshToken</url-pattern>
   </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>ProfileView</display-name>
+    <servlet-name>ProfileView</servlet-name>
+    <servlet-class>com.immanent.user.ProfileView</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>ProfileView</servlet-name>
+    <url-pattern>/ProfileView</url-pattern>
+  </servlet-mapping>
 </web-app>

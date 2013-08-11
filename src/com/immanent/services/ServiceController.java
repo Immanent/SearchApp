@@ -28,7 +28,7 @@ public class ServiceController extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request,
 			HttpServletResponse response) throws ServletException, IOException {
-		dispatch("/login.jsp", request, response);
+		dispatch("/home.jsp", request, response);
 	}
 
 	/**

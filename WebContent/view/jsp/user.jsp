@@ -45,7 +45,7 @@
 								<li><a href="#">View Friend List</a></li>
 								<li><a href="#">View Scopess</a></li>
 							</ul></li>
-						<li><a href="#">Developer</a></li>
+						<li><a href="Manifest">Developer</a></li>
 						<li class="dropdown"><a href="#" class="dropdown-toggle"
 							data-toggle="dropdown">About<b class="caret"></b></a>
 							<ul class="dropdown-menu">
@@ -63,30 +63,17 @@
 	<div class="content">
       <div class="container">
         <div class="page-header">
-          <h1>Please Upload The Application Manifest File</h1>
+          <h1>Please Enter Your Diaspora ID</h1>
         </div>
         <div class="row">
           <div class="span6 offset3">
-            <h4 class="widget-header"><i class="icon-lock"></i> Upload the manifest</h4>
+            <h4 class="widget-header"><i class="icon-lock"></i> Enter Diasopra ID</h4>
             <div class="widget-body">
               <div class="center-align">
-                <form class="form-horizontal form-signin-signup" action="Manifest" method="POST" enctype="multipart/form-data">
-                  <input class="input-file" name="manifest" id="fileInput" type="file">
-                  <input type="submit" value="Upload" class="btn btn-primary btn-large">
+                <form class="form-horizontal form-signin-signup" action="Friendlist" method="POST">
+                  <input type="text" name="diaspora_id" placeholder="Diaspora ID">
+                  <input type="submit" value="Get Profile" class="btn btn-primary btn-large">
                 </form>
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
               </div>
             </div>
           </div>

@@ -56,7 +56,7 @@ public class Manifest extends ServiceController{
 		    
 		    i++;
 		}
-		
+		dispatch("/home.jsp", request, response);
 	}
 
 }

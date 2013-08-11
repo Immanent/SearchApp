@@ -44,7 +44,7 @@ public class Friendlist extends ServiceController {
 	 */
 	protected void doGet(HttpServletRequest request,
 			HttpServletResponse response) throws ServletException, IOException {
-		dispatch("/User.jsp", request, response);
+		dispatch("/user.jsp", request, response);
 	}
 
 	/**
@@ -68,9 +68,10 @@ public class Friendlist extends ServiceController {
 			      tokenModel.setAuth_token(auth_token);
 			      tokenModel.setDiaspora_id(diaspora_id);
 			      tokenModel.save();
+			      response.sendRedirect("http://localhost:3000/dauth/authorize/authorization_token?auth_token="+auth_token);
 			  }
 		     
-			  response.sendRedirect("http://localhost:3000/dauth/authorize/authorization_token?auth_token="+auth_token);
+			  
 		      
 		      
 		} catch (Exception e) {

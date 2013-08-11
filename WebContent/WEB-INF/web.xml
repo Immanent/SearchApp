@@ -58,4 +58,14 @@
     <servlet-name>Login</servlet-name>
     <url-pattern>/Login</url-pattern>
   </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>RefreshToken</display-name>
+    <servlet-name>RefreshToken</servlet-name>
+    <servlet-class>com.immanent.callbacks.RefreshToken</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>RefreshToken</servlet-name>
+    <url-pattern>/RefreshToken</url-pattern>
+  </servlet-mapping>
 </web-app>

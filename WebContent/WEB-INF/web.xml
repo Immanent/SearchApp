@@ -3,10 +3,6 @@
   <display-name>SearchApp</display-name>
   <welcome-file-list>
     <welcome-file>ServiceController</welcome-file>
-    <welcome-file>index.jsp</welcome-file>
-    <welcome-file>default.html</welcome-file>
-    <welcome-file>default.htm</welcome-file>
-    <welcome-file>default.jsp</welcome-file>
   </welcome-file-list>
   <servlet>
     <description></description>
@@ -30,16 +26,6 @@
   </servlet-mapping>
   <servlet>
     <description></description>
-    <display-name>TokenManager</display-name>
-    <servlet-name>TokenManager</servlet-name>
-    <servlet-class>com.immanent.developer.TokenManager</servlet-class>
-  </servlet>
-  <servlet-mapping>
-    <servlet-name>TokenManager</servlet-name>
-    <url-pattern>/TokenManager</url-pattern>
-  </servlet-mapping>
-  <servlet>
-    <description></description>
     <display-name>ServiceController</display-name>
     <servlet-name>ServiceController</servlet-name>
     <servlet-class>com.immanent.services.ServiceController</servlet-class>
@@ -47,16 +33,6 @@
   <servlet-mapping>
     <servlet-name>ServiceController</servlet-name>
     <url-pattern>/ServiceController</url-pattern>
-  </servlet-mapping>
-  <servlet>
-    <description></description>
-    <display-name>Login</display-name>
-    <servlet-name>Login</servlet-name>
-    <servlet-class>com.immanent.services.Login</servlet-class>
-  </servlet>
-  <servlet-mapping>
-    <servlet-name>Login</servlet-name>
-    <url-pattern>/Login</url-pattern>
   </servlet-mapping>
   <servlet>
     <description></description>

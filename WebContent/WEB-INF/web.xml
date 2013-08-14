@@ -78,4 +78,24 @@
     <servlet-name>ProfileView</servlet-name>
     <url-pattern>/ProfileView</url-pattern>
   </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>GetAccessToken</display-name>
+    <servlet-name>GetAccessToken</servlet-name>
+    <servlet-class>com.immanent.token.GetAccessToken</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>GetAccessToken</servlet-name>
+    <url-pattern>/GetAccessToken</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>user</display-name>
+    <servlet-name>user</servlet-name>
+    <servlet-class>com.immanent.user.user</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>user</servlet-name>
+    <url-pattern>/user</url-pattern>
+  </servlet-mapping>
 </web-app>

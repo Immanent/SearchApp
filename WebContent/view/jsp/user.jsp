@@ -70,7 +70,7 @@
             <h4 class="widget-header"><i class="icon-lock"></i> Enter Diasopra ID</h4>
             <div class="widget-body">
               <div class="center-align">
-                <form class="form-horizontal form-signin-signup" action="Friendlist" method="POST">
+                <form class="form-horizontal form-signin-signup" action="GetAccessToken" method="POST">
                   <input type="text" name="diaspora_id" placeholder="Diaspora ID">
                   <input type="submit" value="Get Profile" class="btn btn-primary btn-large">
                 </form>

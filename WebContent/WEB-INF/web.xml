@@ -38,7 +38,7 @@
     <description></description>
     <display-name>RefreshToken</display-name>
     <servlet-name>RefreshToken</servlet-name>
-    <servlet-class>com.immanent.callbacks.RefreshToken</servlet-class>
+    <servlet-class>com.immanent.token.RefreshToken</servlet-class>
   </servlet>
   <servlet-mapping>
     <servlet-name>RefreshToken</servlet-name>

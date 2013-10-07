@@ -28,13 +28,6 @@ public class Manifest extends ServiceController{
     }
 
 	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
-	 */
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		dispatch("/developer.jsp", request, response);
-	}
-
-	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */	
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -56,7 +49,7 @@ public class Manifest extends ServiceController{
 		    
 		    i++;
 		}
-		dispatch("/home.jsp", request, response);
+		dispatch("/user.jsp", request, response);
 	}
 
 }

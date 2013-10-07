@@ -41,7 +41,7 @@
 							data-toggle="dropdown">API Functions<b class="caret"></b></a>
 							<ul class="dropdown-menu">
 								<li class="nav-header">Functionalities</li>
-								<li><a href="user">View Profile</a></li>
+								<li><a href="ProfileView">View Profile</a></li>
 								<li><a href="#">View Friend List</a></li>
 								<li><a href="#">View Scopess</a></li>
 							</ul></li>
@@ -75,7 +75,7 @@
 										<p>Using this functionality in Diaspora API you will be
 											able to view your Diaspora profile details.</p>
 										<h3>
-											<a href="user" class="btn btn-primary">Try now</a> <a href="#"
+											<a href="ProfileView" class="btn btn-primary">Try now</a> <a href="#"
 												class="btn">Learn more</a>
 										</h3>
 									</div>
@@ -94,7 +94,7 @@
 										<p>Using this functionality in Diaspora API you will be
 											able to view the access levels you have allowed.</p>
 										<h3>
-											<a href="Friendlist" class="btn btn-primary">Try now</a> <a
+											<a href="#" class="btn btn-primary">Try now</a> <a
 												href="#" class="btn">Learn more</a>
 										</h3>
 									</div>
@@ -106,8 +106,8 @@
 						</div>
 					</div>
 					<a class="left carousel-control" href="#heroSlider"
-						data-slide="prev">â¹</a> <a class="right carousel-control"
-						href="#heroSlider" data-slide="next">âº</a>
+						data-slide="prev"><</a> <a class="right carousel-control"
+						href="#heroSlider" data-slide="next">></a>
 				</div>
 			</div>
 		</div>
@@ -129,7 +129,7 @@
 							</div>
 							<div class="widget-footer">
 								<p>
-									<a href="user" class="btn btn-primary">Try now</a>&nbsp; <a
+									<a href="ProfileView" class="btn btn-primary">Try now</a>&nbsp; <a
 										href="#" class="btn">Read more</a>
 								</p>
 							</div>

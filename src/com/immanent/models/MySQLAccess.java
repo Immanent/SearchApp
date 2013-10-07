@@ -13,11 +13,11 @@ public class MySQLAccess {
 	Connection conn = null;
 	
 	public Connection createConnection() {
-		String url = "jdbc:mysql://localhost/";
-		String dbName = "manifest";
-		String driver = "com.mysql.jdbc.Driver";
-		String userName = "root";
-		String password = "gazab1";
+		final String url = "jdbc:mysql://localhost/";
+		final String dbName = "manifest";
+		final String driver = "com.mysql.jdbc.Driver";
+		final String userName = "root";
+		final String password = "gazab1";
 
 		try {
 			Class.forName(driver).newInstance();

@@ -15,7 +15,7 @@ public class user extends ServiceController {
 	private static final long serialVersionUID = 1L;
  
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		dispatch("/user.jsp", request, response);
+		dispatch("/home.jsp", request, response);
 	}
 
 	/**

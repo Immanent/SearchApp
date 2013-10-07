@@ -1,5 +1,7 @@
+<%@page import="org.json.JSONObject"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%JSONObject profile = (JSONObject)request.getAttribute("profile"); %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -36,7 +38,7 @@
 				<!-- Start: Primary navigation -->
 				<div class="nav-collapse collapse">
 					<ul class="nav pull-right">
-						<li><a href="Manifest">Developer</a></li>
+						<li><a href="user">Home</a></li>
 						<li class="dropdown"><a href="#" class="dropdown-toggle"
 							data-toggle="dropdown">About<b class="caret"></b></a>
 							<ul class="dropdown-menu">
@@ -51,24 +53,29 @@
 	</div>
 	<!-- End: Navigation wrapper --> </header>
 	<!-- End: HEADER -->
-	<div class="content">
+	  <div class="content">
       <div class="container">
-        <div class="page-header">
-          <h1>Please Enter Your Diaspora ID</h1>
-        </div>
-        <div class="row">
-          <div class="span6 offset3">
-            <h4 class="widget-header"><i class="icon-lock"></i> Enter Diasopra ID</h4>
-            <div class="widget-body">
-              <div class="center-align">
-                <form class="form-horizontal form-signin-signup" action="RefreshToken?action=getRefreshToken" method="POST">
-                  <input type="text" name="diaspora_id" placeholder="Diaspora ID">
-                  <input type="submit" value="GO" class="btn btn-primary btn-large">
-                </form>
-              </div>
+        <article class="article">
+          <div class="page-header">
+            <h1>Diaspora <small><% out.println(profile.get("diaspora_handle"));%></small></h1>
+          </div>
+          <div class="row">
+            <div class="span10 offset1">            
+              <div class="row bottom-space">
+                <div class="span3 center-align">
+                  <img src="<%out.println(profile.get("image_url"));%>" class="thumbnail">
+                </div>
+                <div class="span7">
+                  <p class="team-member-description">
+                    <% 
+                     out.println(profile.toString());
+                    %>
+                  </p>
+                </div>
+              </div>                           
             </div>
           </div>
-        </div>
+        <article>
       </div>
     </div>
     <div class="navbar navbar-fixed-bottom">

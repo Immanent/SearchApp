@@ -40,22 +40,26 @@ public class RefreshToken extends HttpServlet {
 			session.setAttribute("diaspora_id", diaspora_id);
 			String[] splits = diaspora_id.split("@");
 			String redirect_url = "http://" + splits[1] + "/authorize/verify";
+			String auth_token =null;
 			String refresh_token = null;
 			TokenModel tokenModel = new TokenModel(diaspora_id);
 
 			try {
-				//response.setContentType("text/html");
-				refresh_token = tokenModel.getAuth_token();
-
+				//refresh_token = tokenModel.getAuth_token();
+				refresh_token = tokenModel.getRefresh_token();
 				if (refresh_token.isEmpty()) {
 					MySQLAccess dao = new MySQLAccess();
 					String signed_manifest = dao.read();
-					refresh_token = new String(sendPost(redirect_url,signed_manifest));
-					tokenModel.setAuth_token(refresh_token);
+					//refresh_token = new String(sendPost(redirect_url,signed_manifest));
+					auth_token=new String(sendPost(redirect_url, signed_manifest));
+					//tokenModel.setAuth_token(refresh_token);
+					tokenModel.setAuth_token(auth_token);
 					tokenModel.setDiaspora_id(diaspora_id);
 					tokenModel.save();
+					/*response.sendRedirect("http://localhost:3000/dauth/authorize/authorization_token?auth_token="
+							+ refresh_token);*/
 					response.sendRedirect("http://localhost:3000/dauth/authorize/authorization_token?auth_token="
-							+ refresh_token);
+							+ auth_token);
 				}
 				response.sendRedirect("user");
 								

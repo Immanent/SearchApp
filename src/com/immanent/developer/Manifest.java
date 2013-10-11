@@ -51,5 +51,9 @@ public class Manifest extends ServiceController{
 		}
 		dispatch("/user.jsp", request, response);
 	}
+	
+	protected void doGet(HttpServletRequest request, HttpServletResponse response)throws ServletException, IOException {
+		dispatch("/developer.jsp", request, response);		
+	}
 
 }

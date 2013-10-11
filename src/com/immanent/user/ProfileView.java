@@ -51,7 +51,6 @@ public class ProfileView extends ServiceController {
 	private String sendPost(String url, String parameters) throws Exception {
 		HttpClient client = new DefaultHttpClient();
 		HttpPost post = new HttpPost(url);
-		;
 		List<NameValuePair> urlParameters = new ArrayList<NameValuePair>();
 		urlParameters.add(new BasicNameValuePair("diaspora_id", parameters));
 		post.setEntity(new UrlEncodedFormEntity(urlParameters));

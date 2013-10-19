@@ -23,49 +23,39 @@ import org.json.JSONObject;
 import com.immanent.models.MySQLAccess;
 import com.immanent.models.TokenModel;
 
-
 public class RefreshToken extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
-	protected void doGet(HttpServletRequest request,
-			HttpServletResponse response) throws ServletException, IOException {
+	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 	}
 
-	protected void doPost(HttpServletRequest request,
-			HttpServletResponse response) throws ServletException, IOException {
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String action = request.getParameter("action");
+		HttpSession session = request.getSession(true);
 		if (action.equals("getRefreshToken")) {
 			String diaspora_id = request.getParameter("diaspora_id"); // dilma@localhost:3000
-			HttpSession session = request.getSession(true);
 			session.setAttribute("diaspora_id", diaspora_id);
 			String[] splits = diaspora_id.split("@");
 			String redirect_url = "http://" + splits[1] + "/authorize/verify";
-			String auth_token =null;
+			String auth_token = null;
 			String refresh_token = null;
 			TokenModel tokenModel = new TokenModel(diaspora_id);
 
 			try {
-				//refresh_token = tokenModel.getAuth_token();
 				refresh_token = tokenModel.getRefresh_token();
 				if (refresh_token.isEmpty()) {
 					MySQLAccess dao = new MySQLAccess();
 					String signed_manifest = dao.read();
-					//refresh_token = new String(sendPost(redirect_url,signed_manifest));
-					auth_token=new String(sendPost(redirect_url, signed_manifest));
-					//tokenModel.setAuth_token(refresh_token);
+					auth_token = new String(sendPost(redirect_url, signed_manifest));
 					tokenModel.setAuth_token(auth_token);
 					tokenModel.setDiaspora_id(diaspora_id);
 					tokenModel.save();
-					/*response.sendRedirect("http://localhost:3000/dauth/authorize/authorization_token?auth_token="
-							+ refresh_token);*/
-					response.sendRedirect("http://localhost:3000/dauth/authorize/authorization_token?auth_token="
-							+ auth_token);
+					response.sendRedirect("http://localhost:3000/dauth/authorize/authorization_token?auth_token=" + auth_token);
 				}
 				response.sendRedirect("user");
-								
 
 			} catch (Exception e) {
-			
+
 			}
 
 		} else {
@@ -75,7 +65,7 @@ public class RefreshToken extends HttpServlet {
 		}
 
 	}
-	
+
 	private String sendPost(String url, String parameters) throws Exception {
 		HttpClient client = new DefaultHttpClient();
 		HttpPost post = new HttpPost(url);

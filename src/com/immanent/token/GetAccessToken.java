@@ -17,7 +17,6 @@ import org.apache.http.HttpResponse;
 import org.apache.http.NameValuePair;
 import org.apache.http.client.HttpClient;
 import org.apache.http.client.entity.UrlEncodedFormEntity;
-import org.apache.http.client.methods.HttpGet;
 import org.apache.http.client.methods.HttpPost;
 import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.message.BasicNameValuePair;
@@ -43,8 +42,8 @@ public class GetAccessToken extends HttpServlet {
 			access_token = tokenModel.getAccess_token();
 			if (access_token.isEmpty()) {
 				String[] splits = diaspora_id.split("@");
-				String redirect_url = "http://" + splits[1] + "/dauth/authorize/access_token?refresh_token=" + refresh_token;
-				access_token = sendGet(redirect_url);
+				String redirect_url = "http://" + splits[1] + "/authorize/access_token";
+				access_token = sendPost(redirect_url,refresh_token);
 				System.out.println(access_token);
 			}
 		} catch (Exception e) {
@@ -55,24 +54,17 @@ public class GetAccessToken extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 	}
 	
-	private String sendGet(String url) throws Exception {
-		System.out.println(url);
+	private String sendPost(String url,String parameters) throws Exception {
 		HttpClient client = new DefaultHttpClient();
-		HttpGet request = new HttpGet(url);
-		HttpResponse response = client.execute(request);
-		StringBuffer textView=new StringBuffer();
-		// Get the response
-		BufferedReader rd = new BufferedReader
-		  (new InputStreamReader(response.getEntity().getContent()));
-		    
-		String line = "";
-		while ((line = rd.readLine()) != null) {
-		  textView.append(line);
-		} 
-		
-		System.out.println(textView.toString());
- 
-		//JSONObject tokenObject = new JSONObject(line);
-		return "";//(String) tokenObject.get("access_token");
+		HttpPost post = new HttpPost(url);
+		List<NameValuePair> urlParameters = new ArrayList<NameValuePair>();
+		urlParameters.add(new BasicNameValuePair("refresh_token", parameters));
+		post.setEntity(new UrlEncodedFormEntity(urlParameters));
+		HttpResponse response = client.execute(post);
+		BufferedReader rd = new BufferedReader(new InputStreamReader(response.getEntity().getContent()));
+		String line = rd.readLine();
+		System.out.println(line);
+		JSONObject tokenObject = new JSONObject(line);
+		return (String) tokenObject.get("access_token");
 	}
 }

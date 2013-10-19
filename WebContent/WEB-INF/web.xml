@@ -68,7 +68,7 @@
     <description></description>
     <display-name>user</display-name>
     <servlet-name>user</servlet-name>
-    <servlet-class>com.immanent.user.user</servlet-class>
+    <servlet-class>com.immanent.user.User</servlet-class>
   </servlet>
   <servlet-mapping>
     <servlet-name>user</servlet-name>

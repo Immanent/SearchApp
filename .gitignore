@@ -7,7 +7,6 @@
 target
 .classpath
 .externalToolBuilders
-.project
 .settings
 .springBeans
 .DS_Store

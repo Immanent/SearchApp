@@ -5,9 +5,7 @@
 .gwt
 .gwt-tmp
 target
-.classpath
 .externalToolBuilders
-.settings
 .springBeans
 .DS_Store
 build.properties

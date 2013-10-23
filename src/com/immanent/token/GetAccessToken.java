@@ -42,7 +42,7 @@ public class GetAccessToken extends HttpServlet {
 			access_token = tokenModel.getAccess_token();
 			if (access_token.isEmpty()) {
 				String[] splits = diaspora_id.split("@");
-				String redirect_url = "http://" + splits[1] + "/authorize/access_token";
+				String redirect_url = "http://" + splits[1] + "dauth/authorize/access_token";
 				access_token = sendPost(redirect_url,refresh_token);
 				System.out.println(access_token);
 			}

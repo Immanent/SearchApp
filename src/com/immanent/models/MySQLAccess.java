@@ -1,29 +1,33 @@
 package com.immanent.models;
 
+import java.io.IOException;
+import java.io.InputStream;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
-
+import java.util.Properties;
 
 import com.mysql.jdbc.Connection;
 
-public class MySQLAccess {
-	private static MySQLAccess mysqlaccess=null;
+public enum MySQLAccess {
+	INSTANCE;
 	Connection conn = null;
-	
-	public Connection createConnection() {
-		final String url = "jdbc:mysql://localhost/";
-		final String dbName = "manifest";
-		final String driver = "com.mysql.jdbc.Driver";
-		final String userName = "root";
-		final String password = "gazab1";
 
+	public Connection createConnection() {
 		try {
+			Properties prop = new Properties();
+			InputStream in = this.getClass().getClassLoader().getResourceAsStream("com/immanent/models/Properties/database.properties");
+			prop.load(in);
+			final String url = prop.getProperty("url");
+			final String dbName = prop.getProperty("dbName");
+			final String driver = prop.getProperty("driver");
+			final String userName = prop.getProperty("userName");
+			final String password = prop.getProperty("password");
+
 			Class.forName(driver).newInstance();
-			conn = (Connection) DriverManager.getConnection(url + dbName,userName, password);
-		} catch (SQLException | InstantiationException | IllegalAccessException
-				| ClassNotFoundException e) {
+			conn = (Connection) DriverManager.getConnection(url + dbName, userName, password);
+		} catch (SQLException | InstantiationException | IllegalAccessException | ClassNotFoundException | IOException e) {
 			System.out.println("Error :" + e.getMessage());
 			e.printStackTrace();
 		}
@@ -36,7 +40,7 @@ public class MySQLAccess {
 		try {
 			conn = createConnection();
 			Statement st = conn.createStatement();
-			st.executeUpdate("INSERT into signed_content VALUES('"+ app_id + "','" + manifest_content + "')");
+			st.executeUpdate("INSERT into signed_content VALUES('" + app_id + "','" + manifest_content + "')");
 			conn.close();
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -45,7 +49,7 @@ public class MySQLAccess {
 	}
 
 	public String read() {
-		String msg =null;
+		String msg = null;
 		try {
 			conn = createConnection();
 			Statement st = conn.createStatement();

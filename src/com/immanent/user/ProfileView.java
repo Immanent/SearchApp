@@ -28,13 +28,12 @@ import com.immanent.services.ServiceController;
 public class ProfileView extends ServiceController {
 	private static final long serialVersionUID = 1L;
 
-	protected void doGet(HttpServletRequest request,
-			HttpServletResponse response) throws ServletException, IOException {
+	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		try {
 			HttpSession session = request.getSession(false);
-			JSONObject profile = new JSONObject(sendPost(
-					"http://localhost:3000/apiuser_profile/get_profile",
-					(String) session.getAttribute("diaspora_id")));
+			String diasporaId = (String) session.getAttribute("diaspora_id");
+			String[] splits = diasporaId.split("@");
+			JSONObject profile = new JSONObject(sendPost("http://" + splits[1] + "/apiuser_profile/get_profile", diasporaId));
 			request.setAttribute("profile", profile);
 			dispatch("/profile.jsp", request, response);
 		} catch (Exception e) {
@@ -43,8 +42,7 @@ public class ProfileView extends ServiceController {
 
 	}
 
-	protected void doPost(HttpServletRequest request,
-			HttpServletResponse response) throws ServletException, IOException {
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
 	}
 
@@ -55,8 +53,7 @@ public class ProfileView extends ServiceController {
 		urlParameters.add(new BasicNameValuePair("diaspora_id", parameters));
 		post.setEntity(new UrlEncodedFormEntity(urlParameters));
 		HttpResponse response = client.execute(post);
-		BufferedReader rd = new BufferedReader(new InputStreamReader(response
-				.getEntity().getContent()));
+		BufferedReader rd = new BufferedReader(new InputStreamReader(response.getEntity().getContent()));
 		return rd.readLine();
 	}
 

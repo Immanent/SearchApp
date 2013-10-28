@@ -56,15 +56,11 @@ public class TokenModel {
 	}
 
 	public void save() {
-		MySQLAccess mySQLAccess = new MySQLAccess();
-		Connection conn = mySQLAccess.createConnection();
+		Connection conn = MySQLAccess.INSTANCE.createConnection();
 		try {
 			Statement st = conn.createStatement();
-			st.executeUpdate("INSERT INTO token VALUES('" + getDiaspora_id()
-					+ "', '" + getAuth_token() + "', '" + getRefresh_token()
-					+ "','" + getAccess_token()
-					+ "') ON DUPLICATE KEY UPDATE `refresh_token`='"
-					+ getRefresh_token() + "',`access_token`='"
+			st.executeUpdate("INSERT INTO token VALUES('" + getDiaspora_id() + "', '" + getAuth_token() + "', '" + getRefresh_token() + "','"
+					+ getAccess_token() + "') ON DUPLICATE KEY UPDATE `refresh_token`='" + getRefresh_token() + "',`access_token`='"
 					+ getAccess_token() + "'");
 			conn.close();
 		} catch (SQLException e) {
@@ -74,15 +70,12 @@ public class TokenModel {
 	}
 
 	public String get_token(String token_name) {
-		MySQLAccess mySQLAccess = new MySQLAccess();
-		Connection conn = mySQLAccess.createConnection();
+		Connection conn = MySQLAccess.INSTANCE.createConnection();
 		String token = "";
 
 		try {
 			Statement st = conn.createStatement();
-			ResultSet res = st.executeQuery("SELECT " + token_name
-					+ " FROM token WHERE diaspora_id='" + getDiaspora_id()
-					+ "'");
+			ResultSet res = st.executeQuery("SELECT " + token_name + " FROM token WHERE diaspora_id='" + getDiaspora_id() + "'");
 			if (res.next()) {
 				token = res.getString(token_name);
 			}

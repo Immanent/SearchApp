@@ -36,12 +36,12 @@
   </servlet-mapping>
   <servlet>
     <description></description>
-    <display-name>RefreshToken</display-name>
-    <servlet-name>RefreshToken</servlet-name>
-    <servlet-class>com.immanent.token.RefreshToken</servlet-class>
+    <display-name>GetRefreshToken</display-name>
+    <servlet-name>GetRefreshToken</servlet-name>
+    <servlet-class>com.immanent.token.GetRefreshToken</servlet-class>
   </servlet>
   <servlet-mapping>
-    <servlet-name>RefreshToken</servlet-name>
+    <servlet-name>GetRefreshToken</servlet-name>
     <url-pattern>/RefreshToken</url-pattern>
   </servlet-mapping>
   <servlet>
@@ -53,16 +53,6 @@
   <servlet-mapping>
     <servlet-name>ProfileView</servlet-name>
     <url-pattern>/ProfileView</url-pattern>
-  </servlet-mapping>
-  <servlet>
-    <description></description>
-    <display-name>GetAccessToken</display-name>
-    <servlet-name>GetAccessToken</servlet-name>
-    <servlet-class>com.immanent.token.GetAccessToken</servlet-class>
-  </servlet>
-  <servlet-mapping>
-    <servlet-name>GetAccessToken</servlet-name>
-    <url-pattern>/GetAccessToken</url-pattern>
   </servlet-mapping>
   <servlet>
     <description></description>

@@ -10,7 +10,7 @@ import javax.servlet.http.HttpServletResponse;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import com.immanent.models.MySQLAccess;
+import com.immanent.models.DbAccess;
 import com.immanent.services.ServiceController;
 
 /**
@@ -40,7 +40,7 @@ public class Manifest extends ServiceController {
 				try {
 					JSONObject jsonObj = new JSONObject(line);
 					JSONObject app_details = jsonObj.getJSONObject("app_details");
-					MySQLAccess.INSTANCE.insert(app_details.getString("id"), jsonObj.getString("signed_jwt"));
+					DbAccess.INSTANCE.insert(app_details.getString("id"), jsonObj.getString("signed_jwt"));
 				} catch (JSONException e) {
 					System.out.println("Error occcured!");
 					e.printStackTrace();

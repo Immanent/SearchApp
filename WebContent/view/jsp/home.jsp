@@ -41,7 +41,7 @@
 							data-toggle="dropdown">API Functions<b class="caret"></b></a>
 							<ul class="dropdown-menu">
 								<li class="nav-header">Functionalities</li>
-								<li><a href="GetAccessToken">View Profile</a></li>
+								<li><a href="ProfileView">View Profile</a></li>
 								<li><a href="#">View Friend List</a></li>
 								<li><a href="#">View Scopess</a></li>
 							</ul></li>
@@ -75,7 +75,7 @@
 										<p>Using this functionality in Diaspora API you will be
 											able to view your Diaspora profile details.</p>
 										<h3>
-											<a href="GetAccessToken" class="btn btn-primary">Try now</a> <a href="#"
+											<a href="ProfileView" class="btn btn-primary">Try now</a> <a href="#"
 												class="btn">Learn more</a>
 										</h3>
 									</div>
@@ -129,7 +129,7 @@
 							</div>
 							<div class="widget-footer">
 								<p>
-									<a href="GetAccessToken" class="btn btn-primary">Try now</a>&nbsp; <a
+									<a href="ProfileView" class="btn btn-primary">Try now</a>&nbsp; <a
 										href="#" class="btn">Read more</a>
 								</p>
 							</div>

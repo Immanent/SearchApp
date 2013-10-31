@@ -1,12 +1,31 @@
 package com.immanent.token;
 
+import java.io.IOException;
+
+import javax.servlet.ServletException;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.json.JSONObject;
 
 import com.immanent.models.TokenModel;
 import com.immanent.services.SendPost;
+import com.immanent.services.ServiceController;
 
-public class GetAccessToken {
+public class GetAccessToken extends ServiceController {
+	private static final long serialVersionUID = 1L;
+
+	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		HttpSession session = request.getSession(false);
+		String diasporaID = (String) session.getAttribute("diaspora_id");
+		String accessToken = getAccessToken(diasporaID);
+		response.sendRedirect("ProfileView?access_token="+accessToken);
+	}
+
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+
+	}
 
 	public String getAccessToken(String diaspora_id) {
 

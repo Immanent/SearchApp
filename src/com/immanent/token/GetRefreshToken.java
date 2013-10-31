@@ -10,7 +10,7 @@ import javax.servlet.http.HttpSession;
 
 import org.json.JSONObject;
 
-import com.immanent.models.MySQLAccess;
+import com.immanent.models.DbAccess;
 import com.immanent.models.TokenModel;
 import com.immanent.services.SendPost;
 
@@ -34,7 +34,7 @@ public class GetRefreshToken extends HttpServlet {
 			try {
 				refresh_token = tokenModel.getRefresh_token();
 				if (refresh_token.isEmpty()) {
-					MySQLAccess dao = MySQLAccess.INSTANCE;
+					DbAccess dao = DbAccess.INSTANCE;
 					JSONObject responeObject = null;
 					String signed_manifest = dao.read();
 					responeObject = SendPost.INSTANCE.postToAPI(url, "signed_manifest", signed_manifest);
@@ -51,8 +51,7 @@ public class GetRefreshToken extends HttpServlet {
 			}
 
 		} else {
-			TokenModel token = new TokenModel(request.getParameter("diaspora_id")); // to
-																					// bereplaced
+			TokenModel token = new TokenModel(request.getParameter("diaspora_id"));
 			token.setRefresh_token(request.getParameter("refresh_token"));
 			token.save();
 		}

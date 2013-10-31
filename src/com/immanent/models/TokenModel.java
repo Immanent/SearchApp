@@ -4,7 +4,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 
-import com.immanent.models.MySQLAccess;
+import com.immanent.models.DbAccess;
 import com.mysql.jdbc.Connection;
 
 public class TokenModel {
@@ -56,7 +56,7 @@ public class TokenModel {
 	}
 
 	public void save() {
-		Connection conn = MySQLAccess.INSTANCE.createConnection();
+		Connection conn = DbAccess.INSTANCE.createConnection();
 		try {
 			Statement st = conn.createStatement();
 			st.executeUpdate("INSERT INTO token VALUES('" + getDiaspora_id() + "', '" + getAuth_token() + "', '" + getRefresh_token() + "','"
@@ -70,7 +70,7 @@ public class TokenModel {
 	}
 
 	public String get_token(String token_name) {
-		Connection conn = MySQLAccess.INSTANCE.createConnection();
+		Connection conn = DbAccess.INSTANCE.createConnection();
 		String token = "";
 
 		try {

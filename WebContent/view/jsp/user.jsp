@@ -61,7 +61,7 @@
             <h4 class="widget-header"><i class="icon-lock"></i> Enter Diasopra ID</h4>
             <div class="widget-body">
               <div class="center-align">
-                <form class="form-horizontal form-signin-signup" action="RefreshToken?action=getRefreshToken" method="POST">
+                <form class="form-horizontal form-signin-signup" action="GetRefreshToken?action=getRefreshToken" method="POST">
                   <input type="text" name="diaspora_id" placeholder="Diaspora ID">
                   <input type="submit" value="GO" class="btn btn-primary btn-large">
                 </form>

@@ -6,6 +6,7 @@ import java.sql.Statement;
 
 import com.immanent.models.DbAccess;
 import com.mysql.jdbc.Connection;
+import com.mysql.jdbc.PreparedStatement;
 
 public class TokenModel {
 	private String diaspora_id;
@@ -78,6 +79,33 @@ public class TokenModel {
 			ResultSet res = st.executeQuery("SELECT " + token_name + " FROM token WHERE diaspora_id='" + getDiaspora_id() + "'");
 			if (res.next()) {
 				token = res.getString(token_name);
+			}
+			conn.close();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return token;
+
+	}
+	
+	public String getToken(String diasporaID, String tokenType) {
+		
+		Connection conn = DbAccess.INSTANCE.createConnection();
+		
+		String token = "";
+		PreparedStatement ps = null;
+		ResultSet rs = null;
+		String SQLQuery = "SELECT " + tokenType + " FROM token WHERE diaspora_id=?";
+		
+		if (diasporaID.isEmpty())
+			return "";
+		
+		try {
+			ps = (PreparedStatement) conn.prepareStatement(SQLQuery);
+			ps.setString(1, diasporaID);
+			rs = ps.executeQuery();
+			if (rs.next()) {
+				token = rs.getString(tokenType);
 			}
 			conn.close();
 		} catch (SQLException e) {

@@ -161,7 +161,7 @@
 							</div>
 							<div class="widget-footer">
 								<p>
-									<a href="#" class="btn btn-primary">Try now</a>&nbsp; <a
+									<a href="ContactSearch" class="btn btn-primary">Try now</a>&nbsp; <a
 										href="#" class="btn">Read more</a>
 								</p>
 							</div>

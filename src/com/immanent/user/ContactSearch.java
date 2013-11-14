@@ -6,7 +6,6 @@ import java.io.InputStreamReader;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.util.ArrayList;
-import java.util.Iterator;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
@@ -24,6 +23,7 @@ import org.json.JSONObject;
 
 import sun.org.mozilla.javascript.internal.ast.NewExpression;
 
+import com.immanent.models.ContactSearchModel;
 import com.immanent.models.TokenModel;
 import com.immanent.models.dao.ContactDetail;
 import com.immanent.services.ServiceController;
@@ -82,9 +82,9 @@ public class ContactSearch extends ServiceController {
 				uri = new URIBuilder()
 						.setScheme("http")
 						.setHost(hostName)
-						.setPath("/api/users/getUserpersonList/" + diasporaID
-										                         + "/" + access_token)
-			            .build();
+						.setPath(
+								"/api/users/getUserpersonList/" + diasporaID
+										+ "/" + access_token).build();
 				HttpGet httpGet = new HttpGet(uri);
 				res = httpClient.execute(httpGet);
 				int statusCode = res.getStatusLine().getStatusCode();
@@ -108,19 +108,54 @@ public class ContactSearch extends ServiceController {
 
 					for (int i = 0; i < jsonArray.length(); i++) {
 
-						JSONObject friendDetails = jsonArray.getJSONObject(i);						
+						JSONObject friendDetails = jsonArray.getJSONObject(i);
 						ContactDetail person = new ContactDetail();
 
-						person.setFirstName(friendDetails.getString("first_name"));
-						person.setLastName(friendDetails.getString("last_name"));
-						person.setLocation(friendDetails.getString("location"));
-						person.setDiasporaHandle(friendDetails.getString("diaspora_handle"));
-						person.setDob(friendDetails.getString("birthday"));
+						if (friendDetails.get("first_name").equals(null)) {
+							person.setFirstName("");
+						} else {
+							person.setFirstName(friendDetails
+									.getString("first_name"));
+						}
+						if (friendDetails.get("last_name").equals(null)) {
+							person.setLastName("");
+						} else {
+							person.setLastName(friendDetails
+									.getString("last_name"));
+						}
+						if (friendDetails.get("location").equals(null)) {
+							person.setLocation("");
+						} else {
+							person.setLocation(friendDetails
+									.getString("location"));
+						}
+						if (friendDetails.get("diaspora_handle").equals(null)) {
+							person.setDiasporaHandle("");
+						} else {
+							person.setDiasporaHandle(friendDetails
+									.getString("diaspora_handle"));
+						}
+						if (friendDetails.get("birthday").equals(null)) {
+							person.setDob("");
+						} else {
+							person.setDob(friendDetails.getString("birthday"));
+						}
+						// person.setLastName((friendDetails.get("last_name")==null)?"":(String)friendDetails.get("last_name"));
+						// person.setLocation((friendDetails.get("location")==null)?"":(String)friendDetails.get("location"));
+						// person.setDiasporaHandle((friendDetails.get("diaspora_handle")==null)?"":(String)friendDetails.get("diaspora_handle"));
+						// person.setDob((friendDetails.get("birthday")==null)?"":(String)friendDetails.get("birthday"));
 						person.setRelatedHandle(diasporaID);
 
 						contactList.add(person);
 					}
-					// save contact details
+					ContactSearchModel csm = new ContactSearchModel();
+					csm.saveNewContacts(contactList);
+					ArrayList<ContactDetail> resultSet = new ArrayList<ContactDetail>();
+					resultSet = csm.searchContacts(firstName, lastName,
+							diasporaHandle, location);
+					request.setAttribute("search_result", resultSet);
+					dispatch("/search_result.jsp", request, response);
+					// search contact
 
 				} else {
 				}
@@ -131,7 +166,7 @@ public class ContactSearch extends ServiceController {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			} catch (Exception en) {
-
+				en.printStackTrace();
 			}
 
 		}

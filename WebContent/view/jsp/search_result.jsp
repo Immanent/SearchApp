@@ -2,13 +2,13 @@
 <%@page import="org.json.JSONArray"%>
 <%@page import="com.immanent.token.GetAccessToken"%>
 <%@page import="org.json.JSONObject"%>
-<%@page import="java.util.ArrayList"%>
-<%@page import="com.immanent.models.dao.ContactDetail"%>
+<%@page import= "java.util.ArrayList"%>
+<%@page import= "com.immanent.models.dao.ContactDetail"%>
 
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%
-	ArrayList<ContactDetail> resultSet = (ArrayList<ContactDetail>) request.getAttribute("search_result");
+    ArrayList<ContactDetail> resultSet = (ArrayList<ContactDetail>) request.getAttribute("search_result");
 	//JSONObject friendList = (JSONObject) request.getAttribute("friendList");
 	//JSONArray friendArray = friendList.getJSONArray("user_person_list");
 	//JSONObject friend;
@@ -70,7 +70,8 @@
 			<article class="article">
 			<div class="page-header">
 				<h1>
-					Contact Search <small> </small>
+					Search Result <small>
+					</small>
 				</h1>
 				<div id="ProfilePage">
 					<div id="LeftCol">
@@ -79,17 +80,36 @@
 					</div>
 
 					<div id="Info">
-						<form action="ContactSearch?action=search" method="POST">
-							<p>First Name :</p>
-							<input type="text" name="first_name"></br>
-							<p>Last Name :</p>
-							<input type="text" name="last_name"></br>
-							<p>Diaspora handle :</p>
-							<input type="text" name="diaspora_handle"></br>
-							<p>Location :</p>
-							<input type="text" name="location"></br> <input type="submit"
-								value="Search" class="btn btn-primary btn-large">
-						</form>
+					<hr style="color: #000000; height: 10px;">
+						<%
+							if (resultSet.size()==0){%>
+								<strong><%out.println("No result found! "); %></strong>
+							<% }
+							for (ContactDetail result : resultSet) {
+						%>
+						<p>
+							<strong>Name:</strong> <span> <%
+ 		out.println(result.getFirstName()+" "+result.getLastName());
+ %>
+							</span>
+						</p>
+						<p>
+							<strong> Diaspora Handle:</strong> <span> <%
+ 		out.println(result.getDiasporaHandle());
+ %>
+							</span>
+						</p>
+						<p>
+							<strong>Location:</strong> <span> <%
+ 		out.println(result.getLocation());
+ %>
+							</span>
+						</p>
+						
+						<HR color="#0033cc">
+						<%
+							}
+						%>
 					</div>
 
 					<!-- Needed because other elements inside ProfilePage have floats -->
@@ -113,3 +133,5 @@
 	<script type="text/javascript" src="bootstrap/js/bootstrap.min.js"></script>
 	<script type="text/javascript" src="bootstrap/js/boot-business.js"></script>
 </body>
+
+</html>

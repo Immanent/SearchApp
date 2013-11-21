@@ -49,13 +49,16 @@ public class ContactSearch extends ServiceController {
 			HttpServletResponse response) throws ServletException, IOException {
 
 		HttpSession session = request.getSession(false);
-		String diasporaID = (String) session.getAttribute("diaspora_id");
+		String temp = (String) session.getAttribute("diaspora_id");
+		String[] split = temp.split("@");
+		String[] split2 = split[1].split(":");
+		String diasporaID=split[0]+"@"+split2[0];
 		String access_token = GetAccessToken.INSTANCE
-				.getAccessToken(diasporaID);
+				.getAccessToken(temp);
 
 		// testing
-		diasporaID = "akilai@localhost:3000"; // TODO update
-		access_token = new TokenModel().getToken(diasporaID, "access_token");
+		//diasporaID = "akilai@localhost:3000"; // TODO update
+		//access_token = new TokenModel().getToken(diasporaID, "access_token");
 
 		String action = request.getParameter("action");
 		String firstName;
@@ -78,13 +81,13 @@ public class ContactSearch extends ServiceController {
 			URI uri;
 			HttpResponse res;
 			try {
-				String[] splits = diasporaID.split("@");
-				String hostName = splits[1];
+				//String[] splits = diasporaID.split("@");
+				String hostName = split[1];
 				uri = new URIBuilder()
 						.setScheme("http")
 						.setHost(hostName)
 						.setPath(
-								"/api/users/getUserpersonList/" + diasporaID
+								"/api/users/get_user_person_list/" + diasporaID
 										+ "/" + access_token).build();
 				HttpGet httpGet = new HttpGet(uri);
 				res = httpClient.execute(httpGet);

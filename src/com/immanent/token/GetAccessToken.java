@@ -26,14 +26,15 @@ public enum GetAccessToken {
 		System.out.println("ffff"+diaspora_id);
 		String refreshToken = null;
 		String accessToken = null;
-		TokenModel tokenModel = new TokenModel(diaspora_id);
+		String[] splits = diaspora_id.split("@");
+		String[] splits2 = splits[1].split(":");
+		TokenModel tokenModel = new TokenModel(splits[0]+"@"+splits2[0]);
 		JSONObject tokenObject = null;
 
 		try {
 			refreshToken = tokenModel.getRefresh_token();
 			accessToken = tokenModel.getAccess_token();
 			if (accessToken.isEmpty()) {
-				String[] splits = diaspora_id.split("@");
 				//String url = "http://192.168.0.3:3000/dauth/authorize/access_token";
 				String url = "http://"+splits[1]+"/dauth/authorize/access_token";
 				tokenObject = SendPost.INSTANCE.postToAPI(url, "refresh_token", refreshToken);

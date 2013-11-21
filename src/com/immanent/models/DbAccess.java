@@ -58,7 +58,7 @@ public enum DbAccess {
 			msg = res.getString("manifest_content");
 			conn.close();
 		} catch (Exception e) {
-			e.printStackTrace();
+			
 		}
 		return msg;
 	}

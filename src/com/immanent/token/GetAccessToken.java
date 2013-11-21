@@ -23,6 +23,7 @@ public enum GetAccessToken {
 	INSTANCE;
 	public String getAccessToken(String diaspora_id) {
 
+		System.out.println("ffff"+diaspora_id);
 		String refreshToken = null;
 		String accessToken = null;
 		TokenModel tokenModel = new TokenModel(diaspora_id);
@@ -33,7 +34,8 @@ public enum GetAccessToken {
 			accessToken = tokenModel.getAccess_token();
 			if (accessToken.isEmpty()) {
 				String[] splits = diaspora_id.split("@");
-				String url = "http://" + splits[1] + "/dauth/authorize/access_token";
+				//String url = "http://192.168.0.3:3000/dauth/authorize/access_token";
+				String url = "http://"+splits[1]+"/dauth/authorize/access_token";
 				tokenObject = SendPost.INSTANCE.postToAPI(url, "refresh_token", refreshToken);
 				System.out.println(tokenObject.toString());
 				try {

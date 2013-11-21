@@ -13,15 +13,18 @@ import org.json.JSONObject;
 import com.immanent.models.DbAccess;
 import com.immanent.models.TokenModel;
 import com.immanent.services.SendPost;
+import com.immanent.services.ServiceController;
 
-public class GetRefreshToken extends HttpServlet {
+public class GetRefreshToken extends ServiceController {
 	private static final long serialVersionUID = 1L;
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		System.out.println("Gotcha");
 		String action = request.getParameter("action");
+		System.out.println("Action  ="+action);
 		HttpSession session = request.getSession(true);
 		if (action.equals("getRefreshToken")) {
 			String diaspora_id = request.getParameter("diaspora_id"); // dilma@localhost:3000
@@ -42,7 +45,8 @@ public class GetRefreshToken extends HttpServlet {
 					tokenModel.setAuth_token(authToken);
 					tokenModel.setDiaspora_id(diaspora_id);
 					tokenModel.save();
-					response.sendRedirect("http://localhost:3000/dauth/authorize/authorization_token?auth_token=" + authToken);
+					response.sendRedirect("http://" + splits[1] + "/dauth/authorize/authorization_token?auth_token=" + authToken
+							+ "&diaspora_handle=" + splits[0]);
 				}
 				response.sendRedirect("user");
 
@@ -51,11 +55,13 @@ public class GetRefreshToken extends HttpServlet {
 			}
 
 		} else {
+			System.out.println("Gotcha _2");
 			TokenModel token = new TokenModel(request.getParameter("diaspora_id"));
 			token.setRefresh_token(request.getParameter("refresh_token"));
+			System.out.println(token.getRefresh_token());
 			token.save();
 		}
-
+		System.out.println("Out");
 	}
 
 	/*

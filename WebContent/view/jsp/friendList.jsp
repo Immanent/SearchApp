@@ -1,8 +1,12 @@
+<%@page import="org.json.JSONArray"%>
+<%@page import="com.immanent.token.GetAccessToken"%>
 <%@page import="org.json.JSONObject"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%
-	JSONObject profile = (JSONObject) request.getAttribute("profile");
+	JSONObject friendList = (JSONObject) request.getAttribute("friendList");
+	JSONArray friendArray = friendList.getJSONArray("user_person_list");
+	JSONObject friend;
 %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
@@ -61,7 +65,10 @@
 			<article class="article">
 			<div class="page-header">
 				<h1>
-					Diaspora <small>Hello W</small>
+					Diaspora <small> <%
+ 	out.println(request.getAttribute("diasporaID"));
+ %>
+					</small>
 				</h1>
 				<div id="ProfilePage">
 					<div id="LeftCol">
@@ -70,21 +77,19 @@
 					</div>
 
 					<div id="Info">
+						<%
+							for (int i = 0; i < friendArray.length(); i++) {
+						%>
 						<p>
-							<strong>Name:</strong> <span>Sirjon</span>
+							<strong>Name:</strong> <span> <%
+ 	friend = new JSONObject(friendArray.getString(i));
+ 		out.println(friend.get("first_name")+" "+friend.get("last_name"));
+ %>
+							</span>
 						</p>
-						<p>
-							<strong>Name:</strong> <span>Sirjon</span>
-						</p>
-						<p>
-							<strong>Name:</strong> <span>Sirjon</span>
-						</p>
-						<p>
-							<strong>Name:</strong> <span>Sirjon</span>
-						</p>
-						<p>
-							<strong>Name:</strong> <span>Sirjon</span>
-						</p>
+						<%
+							}
+						%>
 					</div>
 
 					<!-- Needed because other elements inside ProfilePage have floats -->

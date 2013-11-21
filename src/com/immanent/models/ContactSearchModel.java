@@ -16,7 +16,7 @@ public class ContactSearchModel {
 		PreparedStatement ps = null;
 
 		Connection conn = DbAccess.INSTANCE.createConnection();
-		String SQLQuery = "INSERT INTO contact_details (friend_handle,first_name,last_name,handle,location) VALUES (?,?,?,?,?)";
+		String SQLQuery = "INSERT INTO contact_details (friend_handle,first_name,last_name,handle,location,url,avatar) VALUES (?,?,?,?,?,?,?)";
 
 		if (contactDetails == null) {
 			return false;
@@ -29,6 +29,8 @@ public class ContactSearchModel {
 				ps.setString(3, contactDetail.getLastName());
 				ps.setString(4, contactDetail.getDiasporaHandle());
 				ps.setString(5, contactDetail.getLocation());
+				ps.setString(6, contactDetail.getUrl());
+				ps.setString(7, contactDetail.getAvatar());
 				isSaved = ps.execute();
 
 			} catch (SQLException e) {
@@ -65,6 +67,8 @@ public class ContactSearchModel {
 	            contact.setLocation(rs.getString("location"));
 	            contact.setDiasporaHandle(rs.getString("handle"));
 	            contact.setRelatedHandle(rs.getString("friend_handle"));
+	            contact.setUrl(rs.getString("url"));
+	            contact.setAvatar(rs.getString("avatar"));
 	            
 	            resultContacts.add(contact);
 			}

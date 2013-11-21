@@ -8,7 +8,21 @@ public class ContactDetail {
 	private String diasporaHandle;
 	private String location;
 	private String dob;
+	private String url;
+	private String avatar;
 	
+	public String getUrl() {
+		return url;
+	}
+	public void setUrl(String url) {
+		this.url = url;
+	}
+	public String getAvatar() {
+		return avatar;
+	}
+	public void setAvatar(String avatar) {
+		this.avatar = avatar;
+	}
 	public String getFirstName() {
 		return firstName;
 	}

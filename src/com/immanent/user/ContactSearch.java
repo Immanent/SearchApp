@@ -49,16 +49,18 @@ public class ContactSearch extends ServiceController {
 			HttpServletResponse response) throws ServletException, IOException {
 
 		HttpSession session = request.getSession(false);
+		
 		String temp = (String) session.getAttribute("diaspora_id");
 		String[] split = temp.split("@");
 		String[] split2 = split[1].split(":");
-		String diasporaID=split[0]+"@"+split2[0];
-		String access_token = GetAccessToken.INSTANCE
-				.getAccessToken(temp);
+		String diasporaID = split[0]+"@"+split2[0];
+		
+		//temp
+		//diasporaID = temp;
+		
+		String hostName = split[1];
+		String access_token = GetAccessToken.INSTANCE.getAccessToken(temp);
 
-		// testing
-		//diasporaID = "akilai@localhost:3000"; // TODO update
-		//access_token = new TokenModel().getToken(diasporaID, "access_token");
 
 		String action = request.getParameter("action");
 		String firstName;
@@ -81,8 +83,7 @@ public class ContactSearch extends ServiceController {
 			URI uri;
 			HttpResponse res;
 			try {
-				//String[] splits = diasporaID.split("@");
-				String hostName = split[1];
+				
 				uri = new URIBuilder()
 						.setScheme("http")
 						.setHost(hostName)
@@ -115,39 +116,14 @@ public class ContactSearch extends ServiceController {
 						JSONObject friendDetails = jsonArray.getJSONObject(i);
 						ContactDetail person = new ContactDetail();
 
-						if (friendDetails.get("first_name").equals(null)) {
-							person.setFirstName("");
-						} else {
-							person.setFirstName(friendDetails
-									.getString("first_name"));
-						}
-						if (friendDetails.get("last_name").equals(null)) {
-							person.setLastName("");
-						} else {
-							person.setLastName(friendDetails
-									.getString("last_name"));
-						}
-						if (friendDetails.get("location").equals(null)) {
-							person.setLocation("");
-						} else {
-							person.setLocation(friendDetails
-									.getString("location"));
-						}
-						if (friendDetails.get("diaspora_handle").equals(null)) {
-							person.setDiasporaHandle("");
-						} else {
-							person.setDiasporaHandle(friendDetails
-									.getString("diaspora_handle"));
-						}
-						if (friendDetails.get("birthday").equals(null)) {
-							person.setDob("");
-						} else {
-							person.setDob(friendDetails.getString("birthday"));
-						}
-						// person.setLastName((friendDetails.get("last_name")==null)?"":(String)friendDetails.get("last_name"));
-						// person.setLocation((friendDetails.get("location")==null)?"":(String)friendDetails.get("location"));
-						// person.setDiasporaHandle((friendDetails.get("diaspora_handle")==null)?"":(String)friendDetails.get("diaspora_handle"));
-						// person.setDob((friendDetails.get("birthday")==null)?"":(String)friendDetails.get("birthday"));
+						person.setFirstName(friendDetails.getString("first_name"));
+						person.setLastName(friendDetails.getString("last_name"));
+						person.setLocation(friendDetails.getString("location"));
+						person.setDiasporaHandle(friendDetails.getString("diaspora_handle"));
+						person.setDob(friendDetails.getString("birthday"));
+						person.setUrl(friendDetails.getString("url"));
+						person.setAvatar(friendDetails.getString("avatar"));
+						
 						person.setRelatedHandle(diasporaID);
 
 						contactList.add(person);

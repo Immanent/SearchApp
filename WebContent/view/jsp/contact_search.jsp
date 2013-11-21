@@ -72,13 +72,13 @@
 				<h1>
 					Contact Search <small> </small>
 				</h1>
-				<div id="ProfilePage">
-					<div id="LeftCol">
-						<div id="Photo"></div>
-						<div id="ProfileOptions"></div>
+				<div id="">
+					<div id="">
+						<div id=""></div>
+						<div id=""></div>
 					</div>
 
-					<div id="Info">
+					<div id="">
 						<form action="ContactSearch?action=search" method="POST">
 							<p>First Name :</p>
 							<input type="text" name="first_name"></br>

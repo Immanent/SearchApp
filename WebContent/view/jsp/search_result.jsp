@@ -73,48 +73,48 @@
 					Search Result <small>
 					</small>
 				</h1>
-				<div id="ProfilePage">
-					<div id="LeftCol">
-						<div id="Photo"></div>
-						<div id="ProfileOptions"></div>
+				<hr style="color: #000000; height: 10px;">
+				<div id="">
+					<%
+						if (resultSet.size()==0){%>
+							<strong><%out.println("No result found! "); %></strong>
+						<% }
+						for (ContactDetail result : resultSet) {
+					%>
+					<div id="LeftCol" style="width:100px;">
+						<div id="Photo" style="width:100px; height:100px">
+							<img src="<%out.println(result.getAvatar()); %>" style="width:100%; height:100%">
+						</div>
 					</div>
-
-					<div id="Info">
-					<hr style="color: #000000; height: 10px;">
-						<%
-							if (resultSet.size()==0){%>
-								<strong><%out.println("No result found! "); %></strong>
-							<% }
-							for (ContactDetail result : resultSet) {
-						%>
+					
+					<div id="">
 						<p>
-							<strong>Name:</strong> <span> <%
- 		out.println(result.getFirstName()+" "+result.getLastName());
- %>
+							<strong>Name:</strong> 
+							<span>
+								<a href="<%out.println(result.getUrl());%>" target="_blank">
+									<%out.println(result.getFirstName()+" "+result.getLastName());%>
+								</a>
 							</span>
 						</p>
 						<p>
-							<strong> Diaspora Handle:</strong> <span> <%
- 		out.println(result.getDiasporaHandle());
- %>
+							<strong> Diaspora Handle:</strong>
+							<span> 
+								<%out.println(result.getDiasporaHandle());%>
 							</span>
 						</p>
 						<p>
-							<strong>Location:</strong> <span> <%
- 		out.println(result.getLocation());
- %>
+							<strong>Location:</strong>
+							<span> 
+								<%out.println(result.getLocation());%>
 							</span>
-						</p>
-						
-						<HR color="#0033cc">
-						<%
-							}
-						%>
+						</p>						
 					</div>
-
 					<!-- Needed because other elements inside ProfilePage have floats -->
-					<div style="clear: both"></div>
+            		<div style="clear: both"></div>
+            		</br>
+					<%}%>
 				</div>
+				<HR color="#0033cc">
 			</div>
 		</div>
 		<article>

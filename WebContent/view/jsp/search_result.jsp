@@ -91,7 +91,12 @@
 						<p>
 							<strong>Name:</strong> 
 							<span>
-								<a href="<%out.println(result.getUrl());%>" target="_blank">
+								<% 		
+									String diasporaID = (String) request.getAttribute("diasporaID");
+									String[] split = diasporaID.split("@");
+									String url = "http://"+split[1]+"/people?q="+result.getDiasporaHandle();
+								%>
+								<a href="<%out.println(url);%>" target="_blank">
 									<%out.println(result.getFirstName()+" "+result.getLastName());%>
 								</a>
 							</span>

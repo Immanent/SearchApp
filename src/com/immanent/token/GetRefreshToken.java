@@ -29,23 +29,25 @@ public class GetRefreshToken extends ServiceController {
 		if (action.equals("getRefreshToken")) {
 			String diaspora_id = request.getParameter("diaspora_id"); // dilma@localhost:3000
 			String[] splits = diaspora_id.split("@");
-			String[] splits2 = splits[1].split(":");
 			session.setAttribute("diaspora_id", diaspora_id);
 			
 			String url = "http://" + splits[1] + "/authorize/verify";
 			String authToken = null;
 			String refresh_token = null;
-			TokenModel tokenModel = new TokenModel(splits[0]+"@"+splits2[0]);
+			TokenModel tokenModel = new TokenModel(diaspora_id);
 			try {
 				refresh_token = tokenModel.getRefresh_token();
 				if (refresh_token.isEmpty()) {
 					DbAccess dao = DbAccess.INSTANCE;
 					JSONObject responeObject = null;
 					String signed_manifest = dao.read();
+					System.out.println(url);
+					System.out.println(signed_manifest);
 					responeObject = SendPost.INSTANCE.postToAPI(url, "signed_manifest", signed_manifest);
+					
 					authToken = (String) responeObject.get("auth_token");
 					tokenModel.setAuth_token(authToken);
-					tokenModel.setDiaspora_id(splits[0]+"@"+splits2[0]);
+					tokenModel.setDiaspora_id(diaspora_id);
 					tokenModel.save();
 					response.sendRedirect("http://" + splits[1] + "/dauth/authorize/authorization_token?auth_token=" + authToken
 							+ "&diaspora_handle=" + splits[0]);

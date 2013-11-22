@@ -27,8 +27,7 @@ public enum GetAccessToken {
 		String refreshToken = null;
 		String accessToken = null;
 		String[] splits = diaspora_id.split("@");
-		String[] splits2 = splits[1].split(":");
-		TokenModel tokenModel = new TokenModel(splits[0]+"@"+splits2[0]);
+		TokenModel tokenModel = new TokenModel(diaspora_id);
 		JSONObject tokenObject = null;
 
 		try {

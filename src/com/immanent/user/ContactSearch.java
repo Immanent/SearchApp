@@ -40,27 +40,19 @@ public class ContactSearch extends ServiceController {
 		// TODO Auto-generated constructor stub
 	}
 
-	protected void doGet(HttpServletRequest request,
-			HttpServletResponse response) throws ServletException, IOException {
+	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		dispatch("/contact_search.jsp", request, response);
 	}
 
-	protected void doPost(HttpServletRequest request,
-			HttpServletResponse response) throws ServletException, IOException {
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
 		HttpSession session = request.getSession(false);
-		
-		String temp = (String) session.getAttribute("diaspora_id");
-		String[] split = temp.split("@");
-		String[] split2 = split[1].split(":");
-		String diasporaID = split[0]+"@"+split2[0];
-		
-		//temp
-		//diasporaID = temp;
-		
-		String hostName = split[1];
-		String access_token = GetAccessToken.INSTANCE.getAccessToken(temp);
 
+		String diasporaID = (String) session.getAttribute("diaspora_id");
+		String[] split = diasporaID.split("@");
+
+		String hostName = split[1];
+		String access_token = GetAccessToken.INSTANCE.getAccessToken(diasporaID);
 
 		String action = request.getParameter("action");
 		String firstName;
@@ -74,7 +66,6 @@ public class ContactSearch extends ServiceController {
 			diasporaHandle = request.getParameter("diaspora_handle");
 			location = request.getParameter("location");
 
-
 			if (access_token.isEmpty()) {
 				// TODO error msg
 			}
@@ -83,18 +74,13 @@ public class ContactSearch extends ServiceController {
 			URI uri;
 			HttpResponse res;
 			try {
-				
-				uri = new URIBuilder()
-						.setScheme("http")
-						.setHost(hostName)
-						.setPath(
-								"/api/users/get_user_person_list/" + diasporaID
-										+ "/" + access_token).build();
+
+				uri = new URIBuilder().setScheme("http").setHost(hostName)
+						.setPath("/api/users/get_user_person_list/" + diasporaID + "/" + access_token).build();
 				HttpGet httpGet = new HttpGet(uri);
 				res = httpClient.execute(httpGet);
 				int statusCode = res.getStatusLine().getStatusCode();
-				BufferedReader rd = new BufferedReader(new InputStreamReader(
-						res.getEntity().getContent()));
+				BufferedReader rd = new BufferedReader(new InputStreamReader(res.getEntity().getContent()));
 				StringBuffer result = new StringBuffer();
 				String line = "";
 				ArrayList<ContactDetail> contactList = new ArrayList<ContactDetail>();
@@ -108,8 +94,7 @@ public class ContactSearch extends ServiceController {
 					// TODO check result is zero or access token expires
 				} else if (statusCode == 200) { // OK
 					responseObject = new JSONObject(result.toString());
-					JSONArray jsonArray = responseObject
-							.getJSONArray("user_person_list");
+					JSONArray jsonArray = responseObject.getJSONArray("user_person_list");
 
 					for (int i = 0; i < jsonArray.length(); i++) {
 
@@ -123,7 +108,7 @@ public class ContactSearch extends ServiceController {
 						person.setDob(friendDetails.getString("birthday"));
 						person.setUrl(friendDetails.getString("url"));
 						person.setAvatar(friendDetails.getString("avatar"));
-						
+
 						person.setRelatedHandle(diasporaID);
 
 						contactList.add(person);
@@ -131,9 +116,9 @@ public class ContactSearch extends ServiceController {
 					ContactSearchModel csm = new ContactSearchModel();
 					csm.saveNewContacts(contactList);
 					ArrayList<ContactDetail> resultSet = new ArrayList<ContactDetail>();
-					resultSet = csm.searchContacts(firstName, lastName,
-							diasporaHandle, location);
+					resultSet = csm.searchContacts(firstName, lastName, diasporaHandle, location);
 					request.setAttribute("search_result", resultSet);
+					request.setAttribute("diasporaID", diasporaID);
 					dispatch("/search_result.jsp", request, response);
 					// search contact
 

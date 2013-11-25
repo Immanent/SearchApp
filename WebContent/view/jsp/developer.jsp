@@ -8,7 +8,7 @@
 <meta name="description"
 	content="Bootbusiness | Short description about company">
 <meta name="author" content="Your name">
-<title>Diaspora | Test Application</title>
+<title>Diaspora | Search Application</title>
 <!-- Bootstrap -->
 <link href="bootstrap/css/bootstrap.min.css" rel="stylesheet">
 <!-- Bootstrap responsive -->
@@ -25,7 +25,7 @@
 	<div class="navbar navbar-fixed-top">
 		<div class="navbar-inner">
 			<div class="container">
-				<a href="index.html" class="brand brand-bootbus">Diaspora Test
+				<a href=# class="brand brand-bootbus">Diaspora Search
 					Application</a>
 				<!-- Below button used for responsive navigation -->
 				<button type="button" class="btn btn-navbar" data-toggle="collapse"
@@ -80,13 +80,13 @@
         </div>
       </div>
     </div>
+    <!-- Start: FOOTER -->
     <div class="navbar navbar-fixed-bottom">
-	<footer>
-	<hr class="footer-divider">
-	<div class="container">
-		<p>&copy; 2013 Immanent, All Rights Reserved.</p>
-	</div>
-	</footer>
+		<footer>
+			<div class="container">
+				<p>&copy; 2013 Immanent, All Rights Reserved.</p>
+			</div>
+		</footer>
 	</div>
 	<!-- End: FOOTER -->
 	<script type="text/javascript" src="bootstrap/js/jquery.min.js"></script>

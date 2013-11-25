@@ -41,9 +41,8 @@ public class Manifest extends ServiceController {
 					JSONObject jsonObj = new JSONObject(line);
 					JSONObject app_details = jsonObj.getJSONObject("app_details");
 					DbAccess.INSTANCE.insert(app_details.getString("id"), jsonObj.getString("signed_jwt"));
-				} catch (JSONException e) {
-					System.out.println("Error occcured!");
-					e.printStackTrace();
+				} catch (Exception e) {
+					response.sendRedirect("ExceptionHandler");
 				}
 			}
 

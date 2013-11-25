@@ -15,7 +15,7 @@ import org.json.JSONObject;
 public enum SendGet {
 	INSTANCE;
 
-	public JSONObject getToApp(String url) {
+	public JSONObject getToApp(String url) throws IOException, JSONException {
 		JSONObject responseObject = null;
 		String line;
 		HttpClient client = new DefaultHttpClient();
@@ -28,11 +28,11 @@ public enum SendGet {
 			responseObject = new JSONObject(line);
 			//String[] splits = responseObject.toString().split("\\");
 		} catch (ClientProtocolException e) {
-			e.printStackTrace();
+			throw e;
 		} catch (IOException e) {
-			e.printStackTrace();
+			throw e;
 		} catch (JSONException e) {
-			e.printStackTrace();
+			throw e;
 		}
 
 		return responseObject;

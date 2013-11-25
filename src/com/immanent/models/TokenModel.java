@@ -49,14 +49,14 @@ public class TokenModel {
 	public TokenModel() {
 	}
 
-	public TokenModel(String diaspora_id) {
+	public TokenModel(String diaspora_id) throws Exception {
 		setDiaspora_id(diaspora_id);
 		setAuth_token(get_token("auth_token"));
 		setRefresh_token(get_token("refresh_token"));
 		setAccess_token(get_token("access_token"));
 	}
 
-	public void save() {
+	public void save() throws Exception {
 		Connection conn = DbAccess.INSTANCE.createConnection();
 		try {
 			Statement st = conn.createStatement();
@@ -70,7 +70,7 @@ public class TokenModel {
 
 	}
 
-	public String get_token(String token_name) {
+	public String get_token(String token_name) throws Exception {
 		Connection conn = DbAccess.INSTANCE.createConnection();
 		String token = "";
 
@@ -88,7 +88,7 @@ public class TokenModel {
 
 	}
 	
-	public String getToken(String diasporaID, String tokenType) {
+	public String getToken(String diasporaID, String tokenType) throws Exception {
 		
 		Connection conn = DbAccess.INSTANCE.createConnection();
 		

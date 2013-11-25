@@ -14,7 +14,7 @@ public enum DbAccess {
 	INSTANCE;
 	Connection conn = null;
 
-	public Connection createConnection() {
+	public Connection createConnection() throws Exception {
 		try {
 			Properties prop = new Properties();
 			InputStream in = this.getClass().getClassLoader().getResourceAsStream("com/immanent/models/Properties/database.properties");
@@ -28,14 +28,13 @@ public enum DbAccess {
 			Class.forName(driver).newInstance();
 			conn = (Connection) DriverManager.getConnection(url + dbName, userName, password);
 		} catch (SQLException | InstantiationException | IllegalAccessException | ClassNotFoundException | IOException e) {
-			System.out.println("Error :" + e.getMessage());
-			e.printStackTrace();
+			throw e;
 		}
 		return conn;
 
 	}
 
-	public void insert(String app_id, String manifest_content) {
+	public void insert(String app_id, String manifest_content) throws Exception {
 
 		try {
 			conn = createConnection();
@@ -43,12 +42,12 @@ public enum DbAccess {
 			st.executeUpdate("INSERT into signed_content VALUES('" + app_id + "','" + manifest_content + "')");
 			conn.close();
 		} catch (SQLException e) {
-			e.printStackTrace();
+			throw e;
 		}
 
 	}
 
-	public String read() {
+	public String read() throws Exception {
 		String msg = null;
 		try {
 			conn = createConnection();
@@ -58,7 +57,7 @@ public enum DbAccess {
 			msg = res.getString("manifest_content");
 			conn.close();
 		} catch (Exception e) {
-			
+			throw e;
 		}
 		return msg;
 	}

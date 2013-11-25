@@ -27,25 +27,13 @@ public class ProfileView extends ServiceController {
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		/*
-		try {
-			HttpSession session = request.getSession(false);
-			String diasporaId = (String) session.getAttribute("diaspora_id");
-			String[] splits = diasporaId.split("@");
-			String url ="http://" + splits[1] + "/apiuser_profile/get_profile";
-			JSONObject profile = SendPost.INSTANCE.postToAPI(url, "diaspora_id", diasporaId);
-			request.setAttribute("profile", profile);
-			dispatch("/profile.jsp", request, response);
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-
-	*/}
+	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
 	}
 
+	@SuppressWarnings("unused")
 	private String sendPost(String url, String parameters) throws Exception {
 		HttpClient client = new DefaultHttpClient();
 		HttpPost post = new HttpPost(url);

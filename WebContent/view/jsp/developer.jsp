@@ -74,19 +74,6 @@
                   <input class="input-file" name="manifest" id="fileInput" type="file">
                   <input type="submit" value="Upload" class="btn btn-primary btn-large">
                 </form>
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
               </div>
             </div>
           </div>

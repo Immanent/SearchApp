@@ -10,7 +10,7 @@ import com.mysql.jdbc.PreparedStatement;
 
 public class ContactSearchModel {
 
-	public boolean saveNewContacts(ArrayList<ContactDetail> contactDetails) {
+	public boolean saveNewContacts(ArrayList<ContactDetail> contactDetails) throws Exception {
 
 		boolean isSaved = false;
 		PreparedStatement ps = null;
@@ -47,7 +47,7 @@ public class ContactSearchModel {
 	}
 
 	public ArrayList<ContactDetail> searchContacts(String firstName,
-			String lastName, String handle, String location) {
+			String lastName, String handle, String location) throws Exception {
 
 		Connection conn = DbAccess.INSTANCE.createConnection();
 		ArrayList<ContactDetail> resultContacts = new ArrayList<ContactDetail>();

@@ -74,4 +74,14 @@
     <servlet-name>ContactSearch</servlet-name>
     <url-pattern>/ContactSearch</url-pattern>
   </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>ExceptionHandler</display-name>
+    <servlet-name>ExceptionHandler</servlet-name>
+    <servlet-class>com.immanent.exceptions.ExceptionHandler</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>ExceptionHandler</servlet-name>
+    <url-pattern>/ExceptionHandler</url-pattern>
+  </servlet-mapping>
 </web-app>

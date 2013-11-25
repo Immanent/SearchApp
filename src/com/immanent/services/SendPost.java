@@ -7,7 +7,6 @@ import java.util.List;
 
 import org.apache.http.HttpResponse;
 import org.apache.http.NameValuePair;
-import org.apache.http.client.ClientProtocolException;
 import org.apache.http.client.HttpClient;
 import org.apache.http.client.entity.UrlEncodedFormEntity;
 import org.apache.http.client.methods.HttpPost;
@@ -18,7 +17,7 @@ import org.json.JSONObject;
 public enum SendPost {
 	INSTANCE;
 
-	public JSONObject postToAPI(String url, String paraname, String parameters) throws ClientProtocolException {
+	public JSONObject postToAPI(String url, String paraname, String parameters) throws Exception {
 		JSONObject responseObject = null;
 		String line;
 		HttpClient client = new DefaultHttpClient();
@@ -32,7 +31,7 @@ public enum SendPost {
 			line = rd.readLine();
 			responseObject = new JSONObject(line);
 		} catch (Exception e) {
-			e.printStackTrace();
+			throw e;
 		}
 		return responseObject;
 	}

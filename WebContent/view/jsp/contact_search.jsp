@@ -7,6 +7,10 @@
 
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%
+    String error = "";
+    error = (String) request.getAttribute("error");
+%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -67,7 +71,11 @@
 					Contact Search <small> </small>
 				</h1>
 				<div id="">
-					<div id="">
+					<div id="" style="color: red;">
+						<% if( error!=null || !error.isEmpty() ){
+							out.println(error);
+						} 					
+						%>
 						<div id=""></div>
 						<div id=""></div>
 					</div>

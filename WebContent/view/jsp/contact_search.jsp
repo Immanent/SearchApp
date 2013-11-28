@@ -1,15 +1,8 @@
-<%@page import="com.sun.org.apache.regexp.internal.REUtil"%>
-<%@page import="org.json.JSONArray"%>
-<%@page import="com.immanent.token.GetAccessToken"%>
-<%@page import="org.json.JSONObject"%>
-<%@page import="java.util.ArrayList"%>
-<%@page import="com.immanent.models.dao.ContactDetail"%>
-
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%
-    String error = "";
-    error = (String) request.getAttribute("error");
+	String error = "";
+	error = (String) request.getAttribute("error");
 %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
@@ -37,7 +30,7 @@
 	<div class="navbar navbar-fixed-top">
 		<div class="navbar-inner">
 			<div class="container">
-				<a href=# class="brand brand-bootbus">Diaspora Search
+				<a href="../SearchApp/" class="brand brand-bootbus">Diaspora Search
 					Application</a>
 				<!-- Below button used for responsive navigation -->
 				<button type="button" class="btn btn-navbar" data-toggle="collapse"
@@ -48,14 +41,9 @@
 				<!-- Start: Primary navigation -->
 				<div class="nav-collapse collapse">
 					<ul class="nav pull-right">
-						<li><a href="user">Home</a></li>
-						<li class="dropdown"><a href="#" class="dropdown-toggle"
-							data-toggle="dropdown">About<b class="caret"></b></a>
-							<ul class="dropdown-menu">
-								<li><a href="http://immanent.github.io/">Blog</a></li>
-							</ul></li>
-						<li><a href="#">FAQ</a></li>
-						<li><a href="#">Contact us</a></li>
+						<li><a href="../SearchApp/" >Home</a></li>
+						<li><a href="http://immanent.github.io/" target="_blank">About</a></li>
+						<li><a href="http://immanent.github.io/contact_us.html" target="_blank">Contact us</a></li>
 					</ul>
 				</div>
 			</div>
@@ -65,43 +53,71 @@
 	<!-- End: HEADER -->
 	<div class="content">
 		<div class="container">
-			<article class="article">
 			<div class="page-header">
-				<h1>
-					Contact Search <small> </small>
-				</h1>
-				<div id="">
-					<div id="" style="color: red;">
-						<% if( error!=null || !error.isEmpty() ){
-							out.println(error);
-						} 					
-						%>
-						<div id=""></div>
-						<div id=""></div>
-					</div>
+				<h1>Contact Search</h1>
+			</div>
+			<div class="row">
+				<div class="span6 offset3">
+					<h4 class="widget-header">
+						<i class="icon-search" style="padding-right: 10px"></i>Search
+						Friends in Diaspora Network
+					</h4>
+					<div class="widget-body">
 
-					<div id="">
-						<form action="ContactSearch?action=search" method="POST">
-							<p>First Name :</p>
-							<input type="text" name="first_name"></br>
-							<p>Last Name :</p>
-							<input type="text" name="last_name"></br>
-							<p>Diaspora handle :</p>
-							<input type="text" name="diaspora_handle"></br>
-							<p>Location :</p>
-							<input type="text" name="location"></br> <input type="submit"
-								value="Search" class="btn btn-primary btn-large">
+						<%if (!error.isEmpty()) {
+							out.println("<div class=\"alert alert-danger\" style=\"margin-left:30px; margin-right: 30px; text-align: center;\">");
+							out.println("<strong>Error</strong>");
+							out.println(" - "+error);
+							out.println("</div>");
+						}%>
+
+						<form class="form-horizontal" action="ContactSearch?action=search"
+							method="POST">
+							<div class="control-group">
+								<label class="control-label" for="first_name">First Name</label>
+								<div class="controls">
+									<input class="input-xlarge" type="text" id="first_name"
+										name="first_name" placeholder="Josh">
+								</div>
+							</div>
+							<div class="control-group">
+								<label class="control-label" for="last_name">Last Name</label>
+								<div class="controls">
+									<input class="input-xlarge" type="text" id="last_name"
+										name="last_name" placeholder="Nicholas">
+								</div>
+							</div>
+							<div class="control-group">
+								<label class="control-label" for="diaspora_handle">Diaspora ID</label>
+								<div class="controls">
+									<input class="input-xlarge" type="text" id="diaspora_handle"
+										name="diaspora_handle" placeholder="test@example.com">
+								</div>
+							</div>
+							<div class="control-group">
+								<label class="control-label" for="location">Location</label>
+								<div class="controls">
+									<input class="input-xlarge" type="text" id="location"
+										name="location" placeholder="landon">
+								</div>
+							</div>
+							<div class="control-group">
+								<div class="controls">
+									<button type="submit" class="btn btn-primary">Search</button>
+									<a href="../SearchApp/user" class="btn">Cancel</a>
+								</div>
+							</div>
 						</form>
-					</div>
 
-					<!-- Needed because other elements inside ProfilePage have floats -->
-					<div style="clear: both"></div>
+					</div>
 				</div>
 			</div>
 		</div>
-		<article>
 	</div>
-	</div>
+	</br>
+	</br>
+	</br>
+	</br>
 	<div class="navbar navbar-fixed-bottom">
 		<footer>
 		<div class="container">

@@ -1,7 +1,3 @@
-<%@page import="com.sun.org.apache.regexp.internal.REUtil"%>
-<%@page import="org.json.JSONArray"%>
-<%@page import="com.immanent.token.GetAccessToken"%>
-<%@page import="org.json.JSONObject"%>
 <%@page import= "java.util.ArrayList"%>
 <%@page import= "com.immanent.models.dao.ContactDetail"%>
 
@@ -9,9 +5,7 @@
 	pageEncoding="UTF-8"%>
 <%
     ArrayList<ContactDetail> resultSet = (ArrayList<ContactDetail>) request.getAttribute("search_result");
-	//JSONObject friendList = (JSONObject) request.getAttribute("friendList");
-	//JSONArray friendArray = friendList.getJSONArray("user_person_list");
-	//JSONObject friend;
+    String diasporaID = (String) request.getAttribute("diasporaID");
 %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
@@ -21,7 +15,7 @@
 <meta name="description"
 	content="Bootbusiness | Short description about company">
 <meta name="author" content="Your name">
-<title>Diaspora | Test Application</title>
+<title>Diaspora | Search Application</title>
 <!-- Bootstrap -->
 <link href="bootstrap/css/bootstrap.min.css" rel="stylesheet">
 <!-- Bootstrap responsive -->
@@ -39,7 +33,7 @@
 	<div class="navbar navbar-fixed-top">
 		<div class="navbar-inner">
 			<div class="container">
-				<a href="index.html" class="brand brand-bootbus">Diaspora Test
+				<a href="../SearchApp/" class="brand brand-bootbus">Diaspora Search
 					Application</a>
 				<!-- Below button used for responsive navigation -->
 				<button type="button" class="btn btn-navbar" data-toggle="collapse"
@@ -50,14 +44,10 @@
 				<!-- Start: Primary navigation -->
 				<div class="nav-collapse collapse">
 					<ul class="nav pull-right">
-						<li><a href="user">Home</a></li>
-						<li class="dropdown"><a href="#" class="dropdown-toggle"
-							data-toggle="dropdown">About<b class="caret"></b></a>
-							<ul class="dropdown-menu">
-								<li><a href="http://immanent.github.io/">Blog</a></li>
-							</ul></li>
-						<li><a href="#">FAQ</a></li>
-						<li><a href="#">Contact us</a></li>
+						<li><a href="../SearchApp/" >Home</a></li>
+						<li><a href="../SearchApp/ContactSearch" >Contact Search</a></li>
+						<li><a href="http://immanent.github.io/" target="_blank">About</a></li>
+						<li><a href="http://immanent.github.io/contact_us.html" target="_blank">Contact us</a></li>
 					</ul>
 				</div>
 			</div>
@@ -67,32 +57,29 @@
 	<!-- End: HEADER -->
 	<div class="content">
 		<div class="container">
-			<article class="article">
 			<div class="page-header">
-				<h1>
-					Search Result <small>
-					</small>
-				</h1>
-				<hr style="color: #000000; height: 10px;">
-				<div id="">
-					<%
-						if (resultSet.size()==0){%>
-							<strong><%out.println("No result found! "); %></strong>
-						<% }
-						for (ContactDetail result : resultSet) {
-					%>
-					<div id="LeftCol" style="width:100px;">
-						<div id="Photo" style="width:100px; height:100px">
-							<img src="<%out.println(result.getAvatar()); %>" style="width:100%; height:100%">
-						</div>
-					</div>
+				<h1>Search Results</h1>
+			</div>
+			<div>
+				<%if (resultSet.size()==0) {
+					out.println("<div class=\"alert alert-danger\" style=\"margin-left:30px; margin-right: 30px; text-align: center;\">");
+					out.println("No result found!");
+					out.println("</div>");
+				}%>
+				<table class="table table-hover">
+					<tbody>
 					
-					<div id="">
-						<p>
+				<% for (ContactDetail result : resultSet) {
+				%>
+					<tr>
+				      <td style="width: 150px">
+				      	<img class="img-polaroid" src="<%out.println(result.getAvatar()); %>" style="width:100px; height:100px">
+				      </td>	
+				      <td>
+				      	<p>
 							<strong>Name:</strong> 
 							<span>
-								<% 		
-									String diasporaID = (String) request.getAttribute("diasporaID");
+								<% 										
 									String[] split = diasporaID.split("@");
 									String url = "http://"+split[1]+"/people?q="+result.getDiasporaHandle();
 								%>
@@ -102,7 +89,7 @@
 							</span>
 						</p>
 						<p>
-							<strong> Diaspora Handle:</strong>
+							<strong> Diaspora ID:</strong>
 							<span> 
 								<%out.println(result.getDiasporaHandle());%>
 							</span>
@@ -112,22 +99,21 @@
 							<span> 
 								<%out.println(result.getLocation());%>
 							</span>
-						</p>						
-					</div>
-					<!-- Needed because other elements inside ProfilePage have floats -->
-            		<div style="clear: both"></div>
-            		</br>
-					<%}%>
+						</p>
+				      </td>	      
+				    </tr>
+				<%}%>
+				    
+					</tbody>			
+				</table>
+				
 				</div>
-				<HR color="#0033cc">
-			</div>
 		</div>
-		<article>
 	</div>
-	</div>
+	</br>
+	</br>
 	<div class="navbar navbar-fixed-bottom">
 		<footer>
-		<hr class="footer-divider">
 		<div class="container">
 			<p>&copy; 2013 Immanent, All Rights Reserved.</p>
 		</div>

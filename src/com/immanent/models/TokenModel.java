@@ -88,19 +88,18 @@ public class TokenModel {
 
 	}
 	
-	public String getToken(String diasporaID, String tokenType) throws Exception {
-		
-		Connection conn = DbAccess.INSTANCE.createConnection();
-		
+	public String getToken(String diasporaID, String tokenType){
+
 		String token = "";
 		PreparedStatement ps = null;
 		ResultSet rs = null;
 		String SQLQuery = "SELECT " + tokenType + " FROM token WHERE diaspora_id=?";
-		
+
 		if (diasporaID.isEmpty())
 			return "";
-		
+
 		try {
+			Connection conn = DbAccess.INSTANCE.createConnection();
 			ps = (PreparedStatement) conn.prepareStatement(SQLQuery);
 			ps.setString(1, diasporaID);
 			rs = ps.executeQuery();
@@ -109,6 +108,8 @@ public class TokenModel {
 			}
 			conn.close();
 		} catch (SQLException e) {
+			e.printStackTrace();
+		} catch (Exception e) {
 			e.printStackTrace();
 		}
 		return token;

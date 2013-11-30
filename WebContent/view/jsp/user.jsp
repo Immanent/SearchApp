@@ -8,7 +8,7 @@
 <meta name="description"
 	content="Bootbusiness | Short description about company">
 <meta name="author" content="Your name">
-<title>Diaspora | Test Application</title>
+<title>Diaspora | Search Application</title>
 <!-- Bootstrap -->
 <link href="bootstrap/css/bootstrap.min.css" rel="stylesheet">
 <!-- Bootstrap responsive -->
@@ -25,8 +25,7 @@
 	<div class="navbar navbar-fixed-top">
 		<div class="navbar-inner">
 			<div class="container">
-				<a href="index.html" class="brand brand-bootbus">Diaspora Test
-					Application</a>
+				<a href="../SearchApp/" class="brand brand-bootbus">Diaspora Search Application</a>
 				<!-- Below button used for responsive navigation -->
 				<button type="button" class="btn btn-navbar" data-toggle="collapse"
 					data-target=".nav-collapse">
@@ -37,13 +36,8 @@
 				<div class="nav-collapse collapse">
 					<ul class="nav pull-right">
 						<li><a href="Manifest">Developer</a></li>
-						<li class="dropdown"><a href="#" class="dropdown-toggle"
-							data-toggle="dropdown">About<b class="caret"></b></a>
-							<ul class="dropdown-menu">
-								<li><a href="http://immanent.github.io/">Blog</a></li>
-							</ul></li>
-						<li><a href="#">FAQ</a></li>
-						<li><a href="#">Contact us</a></li>
+						<li><a href="http://immanent.github.io/" target="_blank">About</a></li>
+						<li><a href="http://immanent.github.io/contact_us.html" target="_blank">Contact us</a></li>
 					</ul>
 				</div>
 			</div>
@@ -54,7 +48,7 @@
 	<div class="content">
       <div class="container">
         <div class="page-header">
-          <h1>Please Enter Your Diaspora ID</h1>
+          <h1>Enter Your Diaspora ID</h1>
         </div>
         <div class="row">
           <div class="span6 offset3">
@@ -62,7 +56,7 @@
             <div class="widget-body">
               <div class="center-align">
                 <form class="form-horizontal form-signin-signup" action="GetRefreshToken?action=getRefreshToken" method="POST">
-                  <input type="text" name="diaspora_id" placeholder="Diaspora ID">
+                  <input type="text" name="diaspora_id" placeholder="test@example.com" type="email" required>
                   <input type="submit" value="GO" class="btn btn-primary btn-large">
                 </form>
               </div>
@@ -73,7 +67,7 @@
     </div>
     <div class="navbar navbar-fixed-bottom">
 	<footer>
-	<hr class="footer-divider">
+	
 	<div class="container">
 		<p>&copy; 2013 Immanent, All Rights Reserved.</p>
 	</div>

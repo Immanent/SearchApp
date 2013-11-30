@@ -53,6 +53,7 @@ public class GetRefreshToken extends ServiceController {
 				response.sendRedirect("user");
 
 			} catch (Exception e) {
+			
 				response.sendRedirect("ExceptionHandler");
 			}
 

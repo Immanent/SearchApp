@@ -10,6 +10,7 @@ import org.apache.http.client.HttpResponseException;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.conn.HttpHostConnectException;
 import org.apache.http.impl.client.DefaultHttpClient;
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -39,7 +40,15 @@ public enum SendGet {
 			// get error message from response
 			JSONObject responseContent = new JSONObject(content.toString());
 			int apiErrorCode = responseContent.getInt("error");
-			throw new HttpResponseException(statusCode, Integer.toString(apiErrorCode));
+			if (apiErrorCode == 310 || apiErrorCode == 313 || apiErrorCode == 314 || apiErrorCode == 403){
+				JSONObject jsonObject = new JSONObject();
+				JSONArray jsonList = new JSONArray();
+				jsonObject.put("user_contact_list", jsonList);
+				return jsonObject;
+				
+			}else{
+				throw new HttpResponseException(statusCode, Integer.toString(apiErrorCode));
+			}
 		} else if (statusCode == 401) {
 			throw new HttpResponseException(statusCode, Integer.toString(051));
 		} else if (statusCode == 403) {

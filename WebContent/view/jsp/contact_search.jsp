@@ -98,7 +98,7 @@
 								<label class="control-label" for="location">Location</label>
 								<div class="controls">
 									<input class="input-xlarge" type="text" id="location"
-										name="location" placeholder="landon">
+										name="location" placeholder="London">
 								</div>
 							</div>
 							<div class="control-group">

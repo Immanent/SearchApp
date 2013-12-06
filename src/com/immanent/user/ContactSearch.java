@@ -64,6 +64,9 @@ public class ContactSearch extends ServiceController {
 			contactsList.addAll(csm.getFriendList(accessToken, diasporaID));
 			//save contacts
 			csm.saveNewContacts(contactsList);
+			//get friends of friends
+			contactsList.clear();
+			contactsList.addAll(csm.getFriendsOfFriendsList(accessToken, diasporaID));
 			// search contacts
 			ArrayList<ContactDetail> resultSet = csm.searchContacts(firstName, lastName,diasporaHandle, location);
 			request.setAttribute("search_result", resultSet);

@@ -76,6 +76,50 @@ public class ContactSearchModel {
 
 		return results;
 	}
+	
+	public ArrayList<ContactDetail> getFriendsOfFriendsList(String accessToken, String diasporaID) throws HttpResponseException, HttpHostConnectException, Exception{
+		
+		ArrayList<ContactDetail> results = new ArrayList<ContactDetail>();
+		
+		//get current list
+		ArrayList<ContactDetail> currentResults = searchContacts("", "", "", "");
+		if (currentResults == null){
+			return null;
+		}
+		for (ContactDetail currentContactDetail : currentResults) {
+			
+			String currentUserdiasporaID = currentContactDetail.getDiasporaHandle();
+		
+			String[] split = currentUserdiasporaID.split("@");
+			String hostName = split[1];
+			String friendListUrl = new URIBuilder().setScheme("http").setHost(hostName).setPath("/api/users/get_user_contact_list/" + currentUserdiasporaID+ "/" + accessToken).build().toString();
+		
+			JSONObject responseJSON = SendGet.INSTANCE.getToApp(friendListUrl);
+			JSONArray contactsJSONArray = responseJSON.getJSONArray("user_contact_list");
+
+			for (int i = 0; i < contactsJSONArray.length(); i++) {
+
+				JSONObject friendDetails = contactsJSONArray.getJSONObject(i);
+				ContactDetail contact = new ContactDetail();
+
+				contact.setFirstName(friendDetails.getString("first_name"));
+				contact.setLastName(friendDetails.getString("last_name"));
+				contact.setLocation(friendDetails.getString("location"));
+				contact.setDiasporaHandle(friendDetails.getString("diaspora_handle"));
+				contact.setDob(friendDetails.getString("birthday"));
+				contact.setUrl(friendDetails.getString("url"));
+				contact.setAvatar(friendDetails.getString("avatar"));
+
+				contact.setRelatedHandle(diasporaID);
+
+				results.add(contact);
+			}
+		}
+
+		return results;
+	}
+	
+	
 
 	public boolean saveNewContacts(ArrayList<ContactDetail> contactDetails) throws Exception {
 

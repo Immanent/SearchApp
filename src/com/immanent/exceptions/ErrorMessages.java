@@ -6,7 +6,7 @@ public enum ErrorMessages {
 	Exception(001,"Application Exception"),
 	ConnectionRefuse(002,"Unable to connect to diaspora pod"),
 	
-	//Basic http Errors
+	//Basic HTTP Errors
 	BadRequest(050,"Bad Request"), 
 	Unauthorized(051,"Unauthorized"), 
 	Forbidden(052,"Forbidden"), 

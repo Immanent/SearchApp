@@ -1,4 +1,4 @@
-package com.immanent.models.dao;
+package com.immanent.models;
 
 public class ContactDetail {
 	

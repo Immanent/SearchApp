@@ -10,7 +10,7 @@ import org.apache.http.conn.HttpHostConnectException;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
-import com.immanent.models.dao.ContactDetail;
+import com.immanent.models.ContactDetail;
 import com.immanent.services.SendGet;
 import com.mysql.jdbc.Connection;
 import com.mysql.jdbc.PreparedStatement;
@@ -51,7 +51,7 @@ public class ContactSearchModel {
 		
 		String[] split = diasporaID.split("@");
 		String hostName = split[1];
-		String friendListUrl = new URIBuilder().setScheme("http").setHost(hostName).setPath("/api/users/get_user_person_list/" + diasporaID+ "/" + accessToken).build().toString();
+		String friendListUrl = new URIBuilder().setScheme("http").setHost(hostName).setPath("/api/users/get_user_contact_list/" + diasporaID+ "/" + accessToken).build().toString();
 		
 		JSONObject responseJSON = SendGet.INSTANCE.getToApp(friendListUrl);
 		JSONArray contactsJSONArray = responseJSON.getJSONArray("user_person_list");

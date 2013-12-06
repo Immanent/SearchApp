@@ -54,6 +54,7 @@ public class GetRefreshToken extends ServiceController {
 					response.sendRedirect("user");
 				}
 			} catch (Exception e) {
+			
 				response.sendRedirect("ExceptionHandler");
 			}
 
@@ -63,7 +64,7 @@ public class GetRefreshToken extends ServiceController {
 			try {
 				token = new TokenModel(request.getParameter("diaspora_id"));
 				token.setRefresh_token(request.getParameter("refresh_token"));
-				System.out.println(token.getRefresh_token());
+				System.out.println("Token -"+token.getRefresh_token());
 				token.save();
 			} catch (Exception e) {
 				response.sendRedirect("ExceptionHandler");

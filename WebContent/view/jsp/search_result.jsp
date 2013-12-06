@@ -1,5 +1,5 @@
 <%@page import= "java.util.ArrayList"%>
-<%@page import= "com.immanent.models.dao.ContactDetail"%>
+<%@page import= "com.immanent.models.ContactDetail"%>
 
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>

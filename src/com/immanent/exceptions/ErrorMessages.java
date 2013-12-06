@@ -9,7 +9,7 @@ public enum ErrorMessages {
 	InvalidDiasporaID(004,"Invalid Diaspora ID"),
 	
 	
-	//Basic http Errors
+	//Basic HTTP Errors
 	BadRequest(050,"Bad Request"), 
 	Unauthorized(051,"Unauthorized"), 
 	Forbidden(052,"Forbidden"), 

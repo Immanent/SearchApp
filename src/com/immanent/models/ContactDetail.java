@@ -2,6 +2,7 @@ package com.immanent.models;
 
 public class ContactDetail {
 	
+	
 	private String relatedHandle;
 	private String firstName;
 	private String lastName;
@@ -10,6 +11,24 @@ public class ContactDetail {
 	private String dob;
 	private String url;
 	private String avatar;
+	
+	public ContactDetail() {
+		super();
+	}
+	
+	public ContactDetail(String relatedHandle, String firstName,
+			String lastName, String diasporaHandle, String location,
+			String dob, String url, String avatar) {
+		super();
+		this.relatedHandle = relatedHandle;
+		this.firstName = firstName;
+		this.lastName = lastName;
+		this.diasporaHandle = diasporaHandle;
+		this.location = location;
+		this.dob = dob;
+		this.url = url;
+		this.avatar = avatar;
+	}
 	
 	public String getUrl() {
 		return url;

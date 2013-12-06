@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<dataset>
+	<!--contact_details Table -->
+	<contact_details id="1" friend_handle="akilai@localhost:3000" first_name="Sanka" last_name="Darshan" handle="Sanka@localhost:3000" location="mathara" url="dfda" avatar="addfa"/>
+	<contact_details id="2" friend_handle="akilai@localhost:3000" first_name="Akila" last_name="Iroshan" handle="akilai@localhost:3000" location="galle" url="dfa" avatar="adfa"/>	
+	<contact_details id="3" friend_handle="akilai@localhost:3000" first_name="Saha" last_name="chaddndan" handle="ydd" location="add" url="dfda" avatar="addfa"/>
+	<contact_details id="4" friend_handle="akilai@localhost:3000" first_name="Saha" last_name="chaddndan" handle="ydd1" location="add" url="dfda" avatar="addfa"/>
+</dataset>

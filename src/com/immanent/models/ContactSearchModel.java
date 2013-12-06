@@ -103,6 +103,7 @@ public class ContactSearchModel {
 			} catch (SQLException e) {
 				e.printStackTrace();
 			}
+			isSaved = true;
 		}
 		try {
 			conn.close();

@@ -1,14 +1,13 @@
 package com.immanent.tests;
 
 import static org.hamcrest.CoreMatchers.is;
-import static org.junit.Assert.assertThat;
-
 import java.util.ArrayList;
 
 import org.dbunit.dataset.IDataSet;
 import org.dbunit.dataset.xml.FlatXmlDataSetBuilder;
 import org.junit.Before;
 import org.junit.Test;
+import static org.junit.Assert.assertThat;
 
 import com.immanent.models.ContactSearchModel;
 import com.immanent.models.ContactDetail;

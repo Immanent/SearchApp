@@ -11,7 +11,7 @@ import org.junit.Before;
 import org.junit.Test;
 
 import com.immanent.models.ContactSearchModel;
-import com.immanent.models.dao.ContactDetail;
+import com.immanent.models.ContactDetail;
 
 public class ContactDetailsModel_SearchContactTester {
 	

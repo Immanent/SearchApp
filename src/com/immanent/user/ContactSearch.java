@@ -13,7 +13,7 @@ import org.apache.http.conn.HttpHostConnectException;
 import com.immanent.exceptions.ErrorMessages;
 import com.immanent.models.ContactSearchModel;
 import com.immanent.models.TokenModel;
-import com.immanent.models.dao.ContactDetail;
+import com.immanent.models.ContactDetail;
 import com.immanent.services.ServiceController;
 import com.immanent.token.GetAccessToken;
 

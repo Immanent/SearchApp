@@ -1,5 +1,6 @@
 package com.immanent.token;
 
+import org.apache.http.client.HttpResponseException;
 import org.json.JSONObject;
 
 import com.immanent.models.TokenModel;
@@ -8,7 +9,7 @@ import com.immanent.services.SendPost;
 public enum GetAccessToken {
 
 	INSTANCE;
-	public String getAccessToken(String diaspora_id) {
+	public String getAccessToken(String diaspora_id) throws HttpResponseException {
 
 		String refreshToken = null;
 		String accessToken = null;
@@ -22,7 +23,6 @@ public enum GetAccessToken {
 
 			String url = "http://" + splits[1]+ "/dauth/authorize/access_token";
 			tokenObject = SendPost.INSTANCE.postToAPI(url, "refresh_token",refreshToken);
-			System.out.println(tokenObject.toString());
 			try {
 				accessToken = (String) tokenObject.get("access_token");
 				tokenModel.setAccess_token(accessToken);
@@ -31,7 +31,7 @@ public enum GetAccessToken {
 				System.out.println("Illegal Access Token! -" + e.getMessage());
 			}
 
-		} catch (Exception e) {
+		}catch (Exception e) {
 			e.printStackTrace();
 		}
 		return accessToken;

@@ -54,7 +54,7 @@ public class ContactSearchModel {
 		String friendListUrl = new URIBuilder().setScheme("http").setHost(hostName).setPath("/api/users/get_user_contact_list/" + diasporaID+ "/" + accessToken).build().toString();
 		
 		JSONObject responseJSON = SendGet.INSTANCE.getToApp(friendListUrl);
-		JSONArray contactsJSONArray = responseJSON.getJSONArray("user_person_list");
+		JSONArray contactsJSONArray = responseJSON.getJSONArray("user_contact_list");
 
 		for (int i = 0; i < contactsJSONArray.length(); i++) {
 

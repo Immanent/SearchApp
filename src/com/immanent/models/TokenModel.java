@@ -61,7 +61,7 @@ public class TokenModel {
 		try {
 			Statement st = conn.createStatement();
 			st.executeUpdate("INSERT INTO token VALUES('" + getDiaspora_id() + "', '" + getAuth_token() + "', '" + getRefresh_token() + "','"
-					+ getAccess_token() + "') ON DUPLICATE KEY UPDATE `refresh_token`='" + getRefresh_token() + "',`access_token`='"
+					+ getAccess_token() + "') ON DUPLICATE KEY UPDATE 'diaspora_id='"+getDiaspora_id()+"'auth_token='"+getAuth_token()+"`refresh_token`='" + getRefresh_token() + "',`access_token`='"
 					+ getAccess_token() + "'");
 			conn.close();
 		} catch (SQLException e) {
@@ -115,4 +115,5 @@ public class TokenModel {
 		return token;
 
 	}
+	
 }

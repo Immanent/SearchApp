@@ -22,18 +22,15 @@ public class ServiceController extends HttpServlet {
 		// TODO Auto-generated constructor stub
 	}
 
-	protected void doGet(HttpServletRequest request,
-			HttpServletResponse response) throws ServletException, IOException {
+	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		dispatch("/user.jsp", request, response);
 	}
 
-	protected void doPost(HttpServletRequest request,
-			HttpServletResponse response) throws ServletException, IOException {
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 	}
 
-	protected void dispatch(String jsp, HttpServletRequest request,
-			HttpServletResponse response) throws ServletException, IOException {
+	protected void dispatch(String jsp, HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
 		if (jsp != null) {
 			String format = request.getParameter("format");
@@ -41,8 +38,7 @@ public class ServiceController extends HttpServlet {
 
 				format = "jsp"; // /Default format is added as jsp for now
 			}
-			RequestDispatcher rd = request.getRequestDispatcher("/view/"
-					.concat(format).concat(jsp));
+			RequestDispatcher rd = request.getRequestDispatcher("/view/".concat(format).concat(jsp));
 			rd.forward(request, response);
 			return;
 		}

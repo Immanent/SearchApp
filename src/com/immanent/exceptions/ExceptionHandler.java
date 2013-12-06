@@ -19,22 +19,13 @@ public class ExceptionHandler extends ServiceController {
 	 *      response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		processError(request, response);
-	}
-
-	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse
-	 *      response)
-	 */
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		processError(request, response);
-	}
-
-	private void processError(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
 		// Analyze the servlet exception
+
 		Throwable throwable = (Throwable) request.getAttribute("javax.servlet.error.exception");
-		Integer statusCode = (Integer) request.getAttribute("javax.servlet.error.status_code");
+		String statusCode = (String) request.getAttribute("message");
 		String servletName = (String) request.getAttribute("javax.servlet.error.servlet_name");
+		String message = "";
+		String message2 = "";
 		if (servletName == null) {
 			servletName = "Unknown";
 		}
@@ -42,7 +33,25 @@ public class ExceptionHandler extends ServiceController {
 		if (requestUri == null) {
 			requestUri = "Unknown";
 		}
+		if (throwable == null && statusCode == null) {
+			message = "Error information is missing";
+		} else {
+			message = "Error information";
+			request.setAttribute("message", message);
+			request.setAttribute("servletName", servletName);
+			request.setAttribute("throwable", throwable);
+			request.setAttribute("requestUri", requestUri);
+		}
 		dispatch("/error.jsp", request, response);
+
+	}
+
+	/**
+	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse
+	 *      response)
+	 */
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		doGet(request, response);
 	}
 
 }

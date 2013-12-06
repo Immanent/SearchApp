@@ -7,10 +7,9 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import org.json.JSONException;
 import org.json.JSONObject;
 
-import com.immanent.models.DbAccess;
+import com.immanent.models.ManifestModel;
 import com.immanent.services.ServiceController;
 
 /**
@@ -22,10 +21,6 @@ public class Manifest extends ServiceController {
 	/**
 	 * @see HttpServlet#HttpServlet()
 	 */
-	public Manifest() {
-		super();
-		// TODO Auto-generated constructor stub
-	}
 
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse
@@ -40,7 +35,11 @@ public class Manifest extends ServiceController {
 				try {
 					JSONObject jsonObj = new JSONObject(line);
 					JSONObject app_details = jsonObj.getJSONObject("app_details");
-					DbAccess.INSTANCE.insert(app_details.getString("id"), jsonObj.getString("signed_jwt"));
+					ManifestModel manifestModel = ManifestModel.INSTANCE;
+					manifestModel.setId(app_details.getString("id"));
+					manifestModel.setManifestContent(jsonObj.getString("signed_jwt"));
+					manifestModel.insert();
+					//DbAccess.INSTANCE.insert(app_details.getString("id"), jsonObj.getString("signed_jwt"));
 				} catch (Exception e) {
 					response.sendRedirect("ExceptionHandler");
 				}

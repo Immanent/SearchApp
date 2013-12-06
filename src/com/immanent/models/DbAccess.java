@@ -3,9 +3,7 @@ package com.immanent.models;
 import java.io.IOException;
 import java.io.InputStream;
 import java.sql.DriverManager;
-import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Statement;
 import java.util.Properties;
 
 import com.mysql.jdbc.Connection;
@@ -34,7 +32,7 @@ public enum DbAccess {
 
 	}
 
-	public void insert(String app_id, String manifest_content) throws Exception {
+/*	public void insert(String app_id, String manifest_content) throws Exception {
 
 		try {
 			conn = createConnection();
@@ -45,9 +43,9 @@ public enum DbAccess {
 			throw e;
 		}
 
-	}
+	}*/
 
-	public String read() throws Exception {
+/*	public String read() throws Exception {
 		String msg = null;
 		try {
 			conn = createConnection();
@@ -60,5 +58,5 @@ public enum DbAccess {
 			throw e;
 		}
 		return msg;
-	}
+	}*/
 }

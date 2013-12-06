@@ -5,6 +5,9 @@ public enum ErrorMessages {
 	//Generic errors
 	Exception(001,"Application Exception"),
 	ConnectionRefuse(002,"Unable to connect to diaspora pod"),
+	UnknownHostException(003,"Unknown server"),
+	InvalidDiasporaID(004,"Invalid Diaspora ID"),
+	
 	
 	//Basic http Errors
 	BadRequest(050,"Bad Request"), 

@@ -1,15 +1,19 @@
 package com.immanent.token;
 
 import java.io.IOException;
+import java.net.SocketException;
+import java.net.UnknownHostException;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import org.apache.http.conn.HttpHostConnectException;
 import org.json.JSONObject;
 
-import com.immanent.models.DbAccess;
+import com.immanent.exceptions.ErrorMessages;
+import com.immanent.models.ManifestModel;
 import com.immanent.models.TokenModel;
 import com.immanent.services.SendPost;
 import com.immanent.services.ServiceController;
@@ -38,10 +42,9 @@ public class GetRefreshToken extends ServiceController {
 
 				refresh_token = tokenModel.getRefresh_token();
 				if (refresh_token.isEmpty()) {
-					//get authentication token
-					DbAccess dao = DbAccess.INSTANCE;
+					// get authentication token
 					JSONObject responeObject = null;
-					String signed_manifest = dao.read();
+					String signed_manifest = ManifestModel.INSTANCE.read();
 					responeObject = SendPost.INSTANCE.postToAPI(url, "signed_manifest", signed_manifest);
 
 					authToken = (String) responeObject.get("auth_token");
@@ -50,26 +53,35 @@ public class GetRefreshToken extends ServiceController {
 					tokenModel.save();
 					response.sendRedirect("http://" + splits[1] + "/dauth/authorize/authorization_token?auth_token=" + authToken
 							+ "&diaspora_handle=" + splits[0]);
-				}else {
+				} else {
 					response.sendRedirect("user");
 				}
+			} catch (HttpHostConnectException e) {
+				request.setAttribute("error", ErrorMessages.ConnectionRefuse.getErrorMessage());
+				dispatch("/user.jsp", request, response);
+			} catch (SocketException e) {
+				request.setAttribute("error", ErrorMessages.ConnectionRefuse.getErrorMessage());
+				dispatch("/user.jsp", request, response);
+			} catch (UnknownHostException e) {
+				request.setAttribute("error", ErrorMessages.UnknownHostException.getErrorMessage());
+				dispatch("/user.jsp", request, response);
 			} catch (Exception e) {
-			
-				response.sendRedirect("ExceptionHandler");
+				request.setAttribute("error", ErrorMessages.InvalidDiasporaID.getErrorMessage());
+				dispatch("/user.jsp", request, response);
 			}
 
 		} else {
-			//get refresh token
+			// get refresh token
 			TokenModel token;
 			try {
 				token = new TokenModel(request.getParameter("diaspora_id"));
 				token.setRefresh_token(request.getParameter("refresh_token"));
-				System.out.println("Token -"+token.getRefresh_token());
 				token.save();
 			} catch (Exception e) {
-				response.sendRedirect("ExceptionHandler");
+				request.setAttribute("message", e.getMessage());
+				dispatch("/user.jsp", request, response);
 			}
-			//get access token
+			// get access token
 			GetAccessToken.INSTANCE.getAccessToken(diaspora_id);
 		}
 
